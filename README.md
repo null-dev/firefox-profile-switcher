@@ -4,7 +4,7 @@ Create, edit, delete and switch between browser profiles seamlessly in Firefox. 
 
 ## Installation
 
-![Screenshot of popup](branding/amo_button.png)
+[![Screenshot of popup](branding/amo_button.png)](https://addons.mozilla.org/en-CA/firefox/addon/profile-switcher/)
 
 The extension requires installation of extra software. You will be prompted to install the software after you have installed the extension.
 
