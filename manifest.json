@@ -1,0 +1,30 @@
+
+{
+  "manifest_version": 2,
+  "name": "Profile Switcher for Firefox",
+  "version": "1.0.5",
+  "description": "Create, manage and switch between browser profiles seamlessly.",
+  "homepage_url": "http://example.com",
+  "permissions": [
+    "storage",
+    "nativeMessaging"
+  ],
+  "icons": {
+      "48": "img/icon.svg",
+      "96": "img/icon.svg"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "img/icon.svg",
+    "default_title": "Switch profile",
+    "default_popup": "js/popup/index.html"
+  },
+  "background": {
+    "page": "js/background/index.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "profile-switcher-ff@nd.ax"
+    }
+  }
+}

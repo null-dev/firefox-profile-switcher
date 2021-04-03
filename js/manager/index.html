@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Profile Switcher</title>
+<style>
+:root {
+    --blue-50: #0a84ff;
+    --blue-50-a30: rgba(10, 132, 255, 0.3);
+    --blue-60: #0060df;
+    --blue-70: #003eaa;
+    --blue-80: #002275;
+    --grey-90-a10: rgba(12, 12, 13, 0.1);
+    --grey-90-a20: rgba(12, 12, 13, 0.2);
+    --grey-90-a30: rgba(12, 12, 13, 0.3);
+    --grey-90-a50: rgba(12, 12, 13, 0.5);
+    --red-60: #d70022;
+    --red-70: #a4000f;
+    --red-80: #5a0002;
+
+    --in-content-selected-text: #fff;
+    --in-content-box-border-color: var(--grey-90-a30);
+    --in-content-box-background: #fff;
+    --in-content-border-hover: var(--grey-90-a50);
+    --in-content-border-active: var(--blue-50);
+    --in-content-border-active-shadow: var(--blue-50-a30);
+    --in-content-button-background: var(--grey-90-a10);
+    --in-content-button-background-hover: var(--grey-90-a20);
+    --in-content-button-background-active: var(--grey-90-a30);
+    --in-content-primary-button-background: var(--blue-60);
+    --in-content-primary-button-background-hover: var(--blue-70);
+    --in-content-primary-button-background-active: var(--blue-80);
+
+    --shadow-10: 0 1px 4px var(--grey-90-a10);
+    --shadow-30: 0 4px 16px var(--grey-90-a10);
+    --shadow-30-reverse: 0 -4px 16px var(--grey-90-a10);
+
+    --bottom-bar-height: 60px;
+    --bottom-bar-transition-time: 0.5s;
+
+    --card-padding: 16px;
+    --card-shadow: var(--shadow-10);
+    --card-outline-color: var(--grey-30);
+    --card-shadow-hover: var(--shadow-30);
+
+    --page-max-width: 1000px;
+}
+html, body {
+    color: #000;
+    font-family: Roboto, Noto, "San Francisco", Ubuntu, "Segoe UI", "Fira Sans", message-box, Arial, sans-serif;
+    font-size: 10pt;
+    background-color: #fefefe;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-list-wrapper {
+    height: calc(100vh - var(--bottom-bar-height));
+    overflow-y: auto;
+}
+.profile-list {
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.bottom-bar {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    box-shadow: var(--shadow-30-reverse);
+    transition: height var(--bottom-bar-transition-time);
+    background: white;
+}
+.bottom-bar, .edit-page-controls {
+    bottom: 0;
+    height: var(--bottom-bar-height);
+}
+.edit-page {
+    position: relative;
+    height: 100%;
+}
+.edit-page-controls {
+    position: absolute;
+}
+.edit-page-controls.left {
+    left: 0;
+}
+.edit-page-controls.right {
+    right: 0;
+}
+#edit_page_header {
+    font-weight: lighter;
+    margin: 0;
+    padding: 0.8em 0 0.5em;
+}
+.edit-page-contents {
+    display: flex;
+    flex-direction: column;
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 0 32px; 
+    height: 100%;
+}
+.edit-page-contents label {
+    display: inline-block;
+    padding: 0.5em 0;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.edit-page-contents input[type="text"] {
+    margin-left: 0;
+    width: 300px;
+}
+.edit-page-scroll {
+    overflow-y: auto;
+    padding: 0 4px;
+    margin-bottom: var(--bottom-bar-height);
+}
+.picture-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.picture-list > img {
+    width: 120px;
+    height: 120px;
+    margin: 12px;
+    border-radius: 140px;
+    border: 2px solid transparent;
+    padding: 2px;
+    cursor: pointer;
+    transition: border-color 150ms;
+}
+.picture-list > img.selected {
+    border-color: var(--blue-50);
+}
+
+.bottom-bar-wrapper {
+    height: var(--bottom-bar-height);
+    overflow-y: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: height var(--bottom-bar-transition-time), opacity var(--bottom-bar-transition-time);
+    opacity: 1;
+}
+
+.bottom-bar.edit-mode {
+    height: 100%;
+}
+
+.bottom-bar.edit-mode > .bottom-bar-wrapper {
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.bottom-bar.edit-mode .bottom-bar-browser-name {
+    line-height: 0px;
+}
+
+.bottom-bar-browser {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.bottom-bar-browser-logo {
+    height: calc(100% - 20px);
+    padding: 10px 8px 0 24px;
+}
+
+.bottom-bar-browser-name {
+    transition: line-height var(--bottom-bar-transition-time);
+    line-height: var(--bottom-bar-height);
+    padding-left: 4px;
+    font-size: 2em;
+    font-weight: lighter;
+    animation: show-browser-name 0.75s;
+    animation-fill-mode: forwards;
+    z-index: -1;
+}
+
+@keyframes show-browser-name {
+    0% {
+        transform: translateX(-15%);
+        opacity: 0;
+    }
+    25% {
+        transform: translateX(-15%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.bottom-bar-controls, .edit-page-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.bottom-bar-controls > button, .edit-page-controls > button {
+    margin-right: 8px;
+}
+
+.bottom-bar-controls > button:last-child, .edit-page-controls > button:last-child {
+    margin-right: 0;
+}
+
+
+
+.profile-card.card {
+    position: relative;
+    box-shadow: var(--shadow-10);
+    width: 160px;
+    height: 200px;
+    transition: box-shadow 150ms, transform 150ms;
+    margin: 15px 15px;
+}
+.profile-card:hover {
+    transform: scale(1.02);
+}
+.profile-card-image {
+    width: 100%;
+    height: 160px;
+    background-color: #eeeeee;
+}
+.profile-card-name {
+    user-select: none;
+    padding: 0 8px;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.profile-card-default {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    /*text-transform: uppercase;*/
+    background-color: var(--in-content-primary-button-background);
+    color: var(--in-content-selected-text) !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-weight: 400;
+    padding: 0 4px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.profile-list-wrapper.editing .profile-card-default {
+    opacity: 1;
+}
+.profile-list-edit-header {
+    text-align: center;
+    margin: 0;
+    pointer-events: none;
+    line-height: 0;
+    transition: line-height 0.5s, opacity 0.5s, margin 0.5s;
+    opacity: 0;
+}
+.profile-list-wrapper.editing .profile-list-edit-header {
+    line-height: 1;
+    opacity: 1;
+    margin-top: 1em;
+}
+
+#edit_mode_toggle_button {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+/* - The below CSS code is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. */
+button {
+  appearance: none;
+  min-height: 32px;
+  color: inherit !important;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background-color: var(--in-content-button-background);
+  font-weight: 400;
+  padding: 0 8px;
+  text-decoration: none;
+}
+
+button:enabled:hover {
+  background-color: var(--in-content-button-background-hover);
+}
+
+button:enabled:hover:active {
+  background-color: var(--in-content-button-background-active);
+}
+button:disabled {
+  opacity: 0.4;
+}
+button.primary {
+  background-color: var(--in-content-primary-button-background);
+  color: var(--in-content-selected-text) !important;
+}
+
+button.primary:enabled:hover {
+  background-color: var(--in-content-primary-button-background-hover);
+}
+
+button.primary:enabled:hover:active {
+  background-color: var(--in-content-primary-button-background-active);
+}
+button.danger-button {
+  background-color: var(--red-60);
+  color: white !important;
+}
+
+button.danger-button:enabled:hover {
+  background-color: var(--red-70);
+}
+
+button.danger-button:enabled:hover:active {
+  background-color: var(--red-80);
+}
+
+.card {
+  background: var(--in-content-box-background);
+  border-radius: 4px;
+  box-shadow: var(--card-shadow);
+  margin: 0 0 8px;
+  transition: box-shadow 150ms;
+  cursor: pointer;
+}
+
+.card:not(.card-no-hover):hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+textarea {
+  appearance: none;
+  border: 1px solid var(--in-content-box-border-color);
+  border-radius: 2px;
+  color: inherit;
+  background-color: var(--in-content-box-background);
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px 8px;
+  margin: 2px 4px;
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):enabled:not(:focus):hover,
+textarea:enabled:not(:focus):hover {
+  border-color: var(--in-content-border-hover);
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+textarea:focus {
+  border-color: var(--in-content-border-active);
+  box-shadow: 0 0 0 1px var(--in-content-border-active),
+    0 0 0 4px var(--in-content-border-active-shadow);
+  outline: none;
+}
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):disabled,
+textarea:disabled {
+  opacity: 0.4;
+}
+</style>
+    </head>
+    <body>
+        <div id="profile_list_wrapper" class="profile-list-wrapper">
+            <h1 id="profile_edit_header" class="profile-list-edit-header">Click a profile to edit it:</h1>
+            <div id="profile_entries" class="profile-list">
+            </div>
+        </div>
+        <div id="bottom_bar" class="bottom-bar">
+            <div class="bottom-bar-wrapper">
+                <div class="bottom-bar-browser">
+                    <img class="bottom-bar-browser-logo" src="/img/firefox.svg"/>
+                    <div class="bottom-bar-browser-name">
+                        <b>Profile&nbsp;Switcher</b> for&nbsp;Firefox
+                    </div>
+                </div>
+                <div class="bottom-bar-controls">
+                    <button id="add_profile_button">+ Add profile</button>
+                    <button id="edit_mode_toggle_button">Edit profiles</button>
+                </div>
+            </div>
+            <div class="edit-page">
+                <div class="edit-page-contents">
+                    <h1 id="edit_page_header"><span id="edit_profile_header_left">Edit profile:</span> <b id="edit_profile_header_right">Default User</b></h1>
+                    <div id="edit_page_scroll" class="edit-page-scroll">
+                        <div><label for="edit_page_profile_name_input">Name:</label></div>
+                        <input id="edit_page_profile_name_input" type="text" />
+                        <div><label for="edit_page_profile_name_input">Picture:</label></div>
+                        <div id="edit_page_picture_list" class="picture-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="edit-page-controls left">
+                    <button id="edit_page_delete_button" class="danger-button">Delete</button>
+                    <button id="edit_page_make_default_button">Set as default profile</button>
+                </div>
+                <div class="edit-page-controls right">
+                    <button id="edit_page_close_button">Cancel</button>
+                    <button id="edit_page_save_button" class="primary">Loading...</button>
+                </div>
+            </div>
+        </div>
+        <script src="../common.js"></script>
+        <script src="../native.js"></script>
+        <script src="manager.js"></script>
+    </body>
+</html>

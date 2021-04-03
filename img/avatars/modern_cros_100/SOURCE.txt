@@ -1,0 +1,2 @@
+Repository: https://chromium.googlesource.com/chromium/src.git
+Path: ui/chromeos/resources/default_100_percent/default_user_images/
