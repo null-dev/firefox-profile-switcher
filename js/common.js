@@ -1,8 +1,16 @@
+const RECOMMENDED_CONNECTOR_VERSION = "0.0.7";
+
 const REQUEST_TYPE_CLOSE_MANAGER = "closeManager";
 
 const STORAGE_NATIVE_INIT = "native.init";
 const STORAGE_NATIVE_CONNECTION_STATE = "native.connected";
+const STORAGE_NATIVE_CONNECTOR_VERSION = "native.connector-version";
 const STORAGE_CACHE_PROFILE_LIST_KEY = "cache.profile-list";
+const STORAGE_CACHE_GLOBAL_OPTIONS = "cache.global-options";
+
+const DEFAULT_GLOBAL_OPTIONS = {
+    darkMode: null
+};
 
 async function subscribeToStorageKey(storageType, key, callback) {
     let result = await browser.storage[storageType].get(key);
@@ -23,6 +31,19 @@ async function subscribeToProfileList(callback) {
 
 async function subscribeToNativeConnectionState(callback) {
     subscribeToStorageKey('local', STORAGE_NATIVE_CONNECTION_STATE, callback);
+}
+
+async function subscribeToNativeConnectorVersion(callback) {
+    subscribeToStorageKey('local', STORAGE_NATIVE_CONNECTOR_VERSION, callback);
+}
+
+async function subscribeToGlobalOptions(callback) {
+    subscribeToStorageKey('local', STORAGE_CACHE_GLOBAL_OPTIONS, options => {
+        callback({
+            ...DEFAULT_GLOBAL_OPTIONS,
+            ...(options != null ? options : {})
+        });
+    });
 }
 
 async function transformAvatarUrl(url) {
@@ -67,3 +88,41 @@ async function fetchAndRoundAvatarAsCanvas(url) {
 
     return {canvas, context:ctx};
 }
+
+// Dark mode
+let profileDarkMode = false;
+let globalDarkMode = false;
+function updateDarkMode() {
+    let dark;
+    if(globalDarkMode != null) {
+        dark = globalDarkMode;
+    } else if(profileDarkMode != null) {
+        dark = profileDarkMode;
+    } else {
+        dark = false;
+    }
+    if(dark) {
+        document.documentElement.classList.add("dark-mode");
+    } else {
+        document.documentElement.classList.remove("dark-mode");
+    }
+}
+subscribeToProfileList(profiles => {
+    if(profiles != null) {
+        const currentProfile = profiles.profiles.find(it => it.id === profiles.current_profile_id);
+        if(currentProfile != null && currentProfile.options != null) {
+            profileDarkMode = currentProfile.options.darkMode;
+        } else {
+            profileDarkMode = null;
+        }
+        updateDarkMode();
+    }
+});
+subscribeToGlobalOptions(globalOptions => {
+    if(globalOptions != null) {
+        globalDarkMode = globalOptions.darkMode;
+    } else {
+        globalDarkMode = null;
+    }
+    updateDarkMode();
+});

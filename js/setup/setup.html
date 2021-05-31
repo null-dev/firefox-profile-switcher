@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Setup Profile Switcher</title>
+    <link rel="stylesheet" href="../common.css">
+<style>
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.content h1 {
+    text-align: center;
+}
+.content ol {
+    text-align: left;
+}
+</style>
+  </head>
+  <body>
+      <div class="content">
+          <h1>Setup Profile Switcher for Firefox</h1>
+          <p>Additional software is required for 'Profile Switcher for Firefox' to access your browser profiles. The extension cannot function without this software. Follow the instructions below to install the software.</p>
+          <hr/>
+          <div class="instructions win">
+              <h3>Instructions for Windows</h3>
+              <div class="arch x86-64 x86-32">
+                  <ol>
+                      <li>Download the file using the button below.</li>
+                      <li>Close your browser.</li>
+                      <li>Open the downloaded file.</li>
+                      <li>Follow the instructions on-screen to install the software.</li>
+                      <li>You can now open your browser and the extension should work.</li>
+                  </ol>
+
+                  <a class="download button primary arch x86-64" href="https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/windows-x64.msi"></a>
+                  <a class="download button primary arch x86-32" href="https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/windows-x86.msi"></a>
+              </div>
+              <div class="arch arm other unsupported">
+                  This extension will probably work on Windows ARM but you'll have to compile it from source yourself. The source code for this extension can be found <a href="https://github.com/null-dev/firefox-profile-switcher-connector">here</a>.
+              </div>
+          </div>
+          <div class="instructions mac">
+              <h3>Instructions for Mac</h3>
+              <ol>
+                  <li>You need Homebrew installed to continue. Homebrew is a popular program used to manage software on Mac computers. Install Homebrew from it's website here: <a href="https://brew.sh/">https://brew.sh/</a></li>
+                  <li>Open the Terminal app.</li>
+                  <li>Paste this command and press <i>ENTER</i> to tell homebrew where to download the software: <code>brew tap null-dev/firefox-profile-switcher</code></li>
+                  <li>Wait for the command to finish, you'll know it's done once you see the <code>%</code> symbol beside your cursor.</li>
+                  <li>Paste the following command and press <i>ENTER</i> to download and install the software: <code>brew install firefox-profile-switcher-connector</code></li>
+                  <li>The output from the above command will give you two more commands you need to run, run those commands.</li>
+                  <li>Restart your browser.</li>
+                  <li>The extension should work now!</li>
+              </ol>
+          </div>
+          <div class="instructions linux">
+              <h3>Instructions for Linux</h3>
+              <p>
+                  What Linux distribution are you running?
+                  &nbsp;
+                  <select id="distribution_select">
+                      <!-- Debian based -->
+                      <option value="ubuntu">Ubuntu</option>
+                      <option value="debian">Debian</option>
+                      <option value="mint">Linux Mint</option>
+                      <option value="popos">Pop! OS</option>
+                      <option value="elementary">elementary OS</option>
+                      <option value="kdeneon">KDE neon</option>
+                      <option value="zorinos">Zorin OS</option>
+                      <option value="deepin">deepin</option>
+                      <option value="kali">Kali Linux</option>
+
+                      <!-- Arch-like -->
+                      <option value="arch">Arch Linux</option>
+                      <option value="manjaro">Manjaro</option>
+                      <option value="endeavouros">EndeavourOS</option>
+
+                      <!-- RPM -->
+                      <option value="fedora">Fedora</option>
+                      <option value="opensuse">openSUSE</option>
+                      <option value="centos">CentOS</option>
+
+                      <option value="other">Other</option>
+                  </select>
+              </p>
+              <div class="distribution ubuntu debian mint popos elementary kdeneon zorinos deepin kali">
+                  <div class="arch x86-64 x86-32">
+                      <p>Download the <code>.deb</code> file using the button below and install it.</p>
+                      <p>After you've installed the software, restart your browser.</p>
+
+                      <a class="download button primary arch x86-64" href="https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/linux-x64.deb"></a>
+                      <a class="download button primary arch x86-32" href="https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/linux-x86.deb"></a>
+                  </div>
+                  <div class="arch arm other unsupported">
+                      <p>I don't have pre-built binaries for your architecture but you can compile them from source:</p>
+                      <div class="compile instructions"></div>
+                  </div>
+              </div>
+              <div class="distribution arch manjaro endeavouros">
+                  <p>Install the <a href="https://aur.archlinux.org/packages/firefox-profile-switcher-connector/"><code>firefox-profile-switcher-connector</code></a> AUR package.</p>
+                  <p>Restart your browser after the package has finished installing.</p>
+              </div>
+              <div class="distribution fedora opensuse centos">
+                  <p>Download the <code>.rpm</code> file using the button below and install it.</p>
+                  <p>After you've installed the software, restart your browser.</p>
+
+                  <a class="download button primary arch x86-64" href="https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/linux-x64.rpm"></a>
+                  <a class="download button primary arch x86-32" href="https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/linux-x86.rpm"></a>
+              </div>
+              <div class="distribution other">
+                  <p>This extension will probably still work on your distro, you'll just have to compile it from source:</p>
+                  <div class="compile instructions"></div>
+              </div>
+          </div>
+          <div class="instructions android unsupported">
+              <h3>Instructions for Android</h3>
+              <p>This extension doesn't work on Android, sorry :(</p>
+          </div>
+          <div class="instructions cros unsupported">
+              <h3>Instructions for Chrome OS</h3>
+              <p>This extension doesn't work on Chrome OS, sorry :(</p>
+          </div>
+          <div class="instructions bsd openbsd">
+              <h3>Instructions for BSD</h3>
+              <p>This extension might work on BSD systems but I've never tested it. You'll have to compile it from source yourself though:</p>
+              <div class="compile instructions"></div>
+          </div>
+          <p>
+              <sub>Advanced Users:
+                  <a class="simple-only" href="#advanced">Show installation instructions for all platforms</a>
+                  <a class="advanced-only" href="#">Show only installation instructions for current platform</a>
+              </sub>
+          </p>
+          <template id="compile_instructions">
+              <ol>
+                  <li>Clone <a href="https://github.com/null-dev/firefox-profile-switcher-connector">this</a> git repository.</li>
+                  <li>Compile the program. Usually this involves running this command: <code>cargo build --verbose --release</code></li>
+                  <li>You will find the compiled binary here: <code>target/release/firefox_profile_switcher_connector</code>. Place it somewhere sensible in your system.</li>
+                  <li>Copy the <code>manifest/manifest-linux.json</code> file to: <code>~/.mozilla/native-messaging-hosts/ax.nd.profile_switcher_ff.json</code>. Replace the <code>path</code> field in the file with the location of the compiled binary.</li>
+                  <li>Restart your browser.</li>
+              </ol>
+          </template>
+      </div>
+      <script src="../common.js"></script>
+      <script src="../native.js"></script>
+      <script src="setup.js"></script>
+  </body>
+</html>

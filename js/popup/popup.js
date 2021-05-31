@@ -73,7 +73,9 @@ document.getElementById("manage_button").addEventListener('click', async () => {
 });
 
 document.getElementById('complete_setup_button').addEventListener('click', () => {
-    window.open('https://github.com/null-dev/firefox-profile-switcher-connector/wiki/Download-connector-software', '_blank');
+    browser.tabs.create({
+        url: "/js/setup/setup.html"
+    });
     window.close();
 });
 
@@ -86,5 +88,20 @@ subscribeToNativeConnectionState(state => {
     } else {
         popupContent.style.display = 'none';
         warningContent.style.display = 'initial';
+    }
+});
+
+const updateWarning = document.getElementById("update_available_button");
+updateWarning.addEventListener('click', () => {
+    browser.tabs.create({
+        url: "/js/update/update.html"
+    });
+    window.close();
+});
+subscribeToNativeConnectorVersion(version => {
+    if(version != null && compareVersions(RECOMMENDED_CONNECTOR_VERSION, version) >= 1) {
+        updateWarning.style.display = 'block';
+    } else {
+        updateWarning.style.display = 'none';
     }
 });

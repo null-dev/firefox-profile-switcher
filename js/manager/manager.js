@@ -4,11 +4,15 @@ browser.runtime.onMessage.addListener((req, sender) => {
     }
 });
 
+let globalOptions = null;
+
 let profiles = null;
 let editMode = false;
 
 let editingProfile = null;
 let editingOriginalProfile = null;
+
+let settingsOpen = false;
 
 let profileListCommitId = 0;
 async function updateProfileList() {
@@ -91,6 +95,10 @@ async function setupProfileList() {
 
 setupProfileList();
 
+subscribeToGlobalOptions(newOptions => {
+    globalOptions = newOptions;
+});
+
 const bottomBar = document.getElementById("bottom_bar");
 const editPageScroll = document.getElementById("edit_page_scroll");
 const editProfileHeaderLeft = document.getElementById("edit_profile_header_left");
@@ -120,6 +128,8 @@ let selectedAvatarElement = null;
 async function updateEditPage() {
     if(editingProfile != null) {
         editPageScroll.scrollTop = 0;
+        bottomBar.classList.add("expanded");
+        bottomBar.classList.remove("settings-mode");
         bottomBar.classList.add("edit-mode");
 
         if(editingProfile.id != null) {
@@ -138,7 +148,7 @@ async function updateEditPage() {
         }
         await updatePictureList(avatarList);
     } else {
-        bottomBar.classList.remove("edit-mode");
+        bottomBar.classList.remove("expanded");
     }
 }
 
@@ -155,6 +165,16 @@ document.getElementById("add_profile_button").addEventListener('click', () => {
     editingProfile = {};
     editingOriginalProfile = {};
     updateEditPage();
+});
+document.getElementById("settings_mode_toggle_button").addEventListener('click', () => {
+    if(globalOptions == null) return;
+    if(profiles == null) return;
+    const currentProfile = profiles.profiles.find(it => it.id === profiles.current_profile_id);
+    if(currentProfile == null) return;
+    deserializeSettings(currentProfile.options != null ? currentProfile.options : {}, globalOptions);
+
+    settingsOpen = true;
+    updateSettingsPage();
 });
 
 const editPageMakeDefaultButton = document.getElementById("edit_page_make_default_button");
@@ -193,10 +213,10 @@ editPageSaveButton.addEventListener('click', async () => {
         try {
             if(editingProfileSave.id == null) {
                 // Create
-                await nativeCreateProfile(editingProfileSave.name, editingProfileSave.avatar);
+                await nativeCreateProfile(editingProfileSave.name, editingProfileSave.avatar, {});
             } else {
                 // Update
-                await nativeUpdateProfile(editingProfileSave.id, editingProfileSave.name, editingProfileSave.avatar, editingProfileSave.default);
+                await nativeUpdateProfile(editingProfileSave.id, editingProfileSave.name, editingProfileSave.avatar, editingProfileSave.default, editingProfileSave.options);
             }
 
             // Saved, bring user out of edit mode
@@ -217,7 +237,7 @@ editPageMakeDefaultButton.addEventListener('click', async () => {
     if(editingProfile != null && editingOriginalProfile != null) {
         try {
             // Update
-            await nativeUpdateProfile(editingOriginalProfile.id, editingOriginalProfile.name, editingOriginalProfile.avatar, true);
+            await nativeUpdateProfile(editingOriginalProfile.id, editingOriginalProfile.name, editingOriginalProfile.avatar, true, editingProfileSave.options);
 
             // Saved
             editingProfile.default = true;
@@ -310,4 +330,72 @@ async function updateEditButtons() {
     }
 
     editPageSaveButton.disabled = true;
+}
+
+const settingsPageCancelButton = document.getElementById("settings_page_cancel_button");
+const settingsPageSaveButton = document.getElementById("settings_page_save_button");
+
+const settingsPageDarkModeInput = document.getElementById("settings_page_dark_mode_input");
+const settingsPageDarkModeAllInput = document.getElementById("settings_page_dark_mode_all_input");
+
+function serializeSettings() {
+    const profile = {};
+    const global = {};
+
+    // Dark mode
+    profile.darkMode = settingsPageDarkModeInput.checked;
+    global.darkMode = settingsPageDarkModeAllInput.checked ? profile.darkMode : null;
+
+    return { profile, global };
+}
+
+function deserializeSettings(profile, global) {
+    settingsPageDarkModeInput.checked = global.darkMode != null ? global.darkMode : profile.darkMode;
+    settingsPageDarkModeAllInput.checked = global.darkMode != null;
+}
+
+settingsPageCancelButton.addEventListener('click', () => {
+    if(savingSettings) return;
+
+    settingsOpen = false;
+    updateSettingsPage();
+});
+
+let savingSettings = false;
+settingsPageSaveButton.addEventListener('click', async () => {
+    if(savingSettings) return;
+    savingSettings = true;
+
+    try {
+        const { profile, global } = serializeSettings();
+        const currentProfile = profiles.profiles.find(it => it.id === profiles.current_profile_id);
+
+        await nativeUpdateProfile(currentProfile.id, currentProfile.name, currentProfile.avatar, currentProfile.default, {
+            ...currentProfile.options,
+            ...profile
+        });
+        await nativeUpdateOptions(global);
+
+        settingsOpen = false;
+        updateSettingsPage();
+    } catch(e) {
+        console.error(e);
+        if(e.message != null) {
+            alert("ERROR: " + e.message);
+        } else {
+            alert("An unknown error occured, please contact the developer!");
+        }
+    }
+
+    savingSettings = false;
+});
+
+function updateSettingsPage() {
+    if(settingsOpen) {
+        bottomBar.classList.add("expanded");
+        bottomBar.classList.remove("edit-mode");
+        bottomBar.classList.add("settings-mode");
+    } else {
+        bottomBar.classList.remove("expanded");
+    }
 }

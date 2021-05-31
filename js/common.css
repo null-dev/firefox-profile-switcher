@@ -1,0 +1,257 @@
+:root {
+    --blue-50: #0a84ff;
+    --blue-50-a30: rgba(10, 132, 255, 0.3);
+    --blue-60: #0060df;
+    --blue-70: #003eaa;
+    --blue-80: #002275;
+    --grey-90-a10: rgba(12, 12, 13, 0.1);
+    --grey-90-a20: rgba(12, 12, 13, 0.2);
+    --grey-90-a30: rgba(12, 12, 13, 0.3);
+    --grey-90-a50: rgba(12, 12, 13, 0.5);
+    --red-60: #d70022;
+    --red-70: #a4000f;
+    --red-80: #5a0002;
+
+    --in-content-page-color: rgb(21, 20, 26);
+    --in-content-page-background: #fefefe;
+    --in-content-deemphasized-text: rgb(91, 91, 102);
+    --in-content-text-color: var(--in-content-page-color);
+    --in-content-selected-text: #fff;
+    /*--in-content-box-border-color: var(--grey-90-a30);*/
+    --in-content-box-border-color: rgb(143, 143, 157);
+    --in-content-box-background: #fff;
+    --in-content-border-hover: var(--grey-90-a50);
+    --in-content-border-active: var(--blue-50);
+    --in-content-border-active-shadow: var(--blue-50-a30);
+    --in-content-button-background: var(--grey-90-a10);
+    --in-content-button-background-hover: var(--grey-90-a20);
+    --in-content-button-background-active: var(--grey-90-a30);
+    --in-content-primary-button-background: var(--blue-60);
+    --in-content-primary-button-background-hover: var(--blue-70);
+    --in-content-primary-button-background-active: var(--blue-80);
+    --in-content-primary-button-text-color: rgb(255,255,255);
+
+    --in-content-link-color: var(--blue-60);
+    --in-content-link-color-hover: var(--blue-70);
+    --in-content-link-color-active: var(--blue-80);
+    --in-content-link-color-visited: var(--blue-60);
+
+    --shadow-10: 0 1px 4px var(--grey-90-a10);
+    --shadow-30: 0 4px 16px var(--grey-90-a10);
+    --shadow-30-reverse: 0 -4px 16px var(--grey-90-a10);
+
+    --bottom-bar-height: 60px;
+    --bottom-bar-transition-time: 0.5s;
+    --bottom-bar-background: white;
+
+    --card-padding: 16px;
+    --card-shadow: var(--shadow-10);
+    --card-outline-color: var(--grey-30);
+    --card-shadow-hover: var(--shadow-30);
+
+    --button-hover-light: #e9e9e9;
+    --code-background: lightgrey;
+}
+html.dark-mode {
+    --in-content-page-background: rgb(28,27,34);
+    --in-content-page-color: rgb(251,251,254);
+    --in-content-deemphasized-text: rgb(191,191,201);
+
+    --in-content-box-background: rgb(35, 34, 43);
+    --in-content-box-background-odd: rgba(249,249,250,0.05);
+    --in-content-box-info-background: rgba(249,249,250,0.15);
+
+    --in-content-border-color: rgba(249,249,250,0.2);
+    --in-content-border-hover: rgba(249,249,250,0.3);
+    --in-content-border-invalid: rgb(255,132,139);
+
+    --in-content-error-text-color: #FF9AA2;
+
+    --in-content-button-background: rgb(43,42,51);
+    --in-content-button-background-hover: rgb(82,82,94);
+    --in-content-button-background-active: rgb(91,91,102);
+    --in-content-icon-color: rgb(251,251,254);
+
+    --in-content-primary-button-text-color: rgb(20,20,26);
+    --in-content-primary-button-background: rgb(0,221,255);
+    --in-content-primary-button-background-hover: rgb(128,235,255);
+    --in-content-primary-button-background-active: rgb(170,242,255);
+
+    --in-content-danger-button-background: #ff848b;
+    --in-content-danger-button-background-hover: #ffbdc5;
+    --in-content-danger-button-background-active: #ffdfe7;
+
+    --in-content-table-background: rgb(35, 34, 43);
+    --in-content-table-border-dark-color: rgba(249,249,250,0.2);
+    --in-content-table-header-background: rgb(5, 64, 150);
+    --in-content-table-header-color: var(--in-content-page-color);
+    --in-content-dialog-header-background: rgba(249,249,250,0.05);
+
+    --in-content-accent-color: var(--in-content-primary-button-background);
+    --in-content-accent-color-active: var(--in-content-primary-button-background-hover);
+    --in-content-link-color: var(--in-content-primary-button-background);
+    --in-content-link-color-hover: var(--in-content-primary-button-background-hover);
+    --in-content-link-color-active: var(--in-content-primary-button-background-active);
+    --in-content-link-color-visited: var(--in-content-link-color);
+
+    --card-outline-color: var(--grey-60);
+
+    --dialog-warning-text-color: var(--red-40);
+
+    --checkbox-unchecked-bgcolor: rgb(43, 42, 51);
+    --checkbox-unchecked-hover-bgcolor: rgb(82, 82, 94);
+    --checkbox-unchecked-active-bgcolor: rgb(91, 91, 102);
+    --checkbox-checked-bgcolor: rgb(0, 221, 255);
+    --checkbox-checked-color: rgb(43, 42, 51);
+    --checkbox-checked-hover-bgcolor: rgb(128, 235, 255);
+    --checkbox-checked-active-bgcolor: rgb(170, 242, 255);
+
+    --bottom-bar-background: var(--in-content-box-background);
+
+    --button-hover-light: var(--in-content-button-background-hover);
+    --code-background: rgb(63, 61, 79);
+}
+html.dark-mode .invert-when-dark {
+    filter: invert(100%);
+}
+html, body {
+    background-color: var(--in-content-page-background);
+    color: var(--in-content-page-color);
+
+    /*background-color: #fefefe;*/
+    /*color: #000;*/
+
+    font-family: Roboto, Noto, "San Francisco", Ubuntu, "Segoe UI", "Fira Sans", message-box, Arial, sans-serif;
+    font-size: 12pt;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* - The below CSS code is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. */
+.button, button {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10pt;
+  appearance: none;
+  min-height: 32px;
+  color: inherit !important;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background-color: var(--in-content-button-background);
+  font-weight: 400;
+  padding: 0 8px;
+  text-decoration: none;
+}
+
+.button:hover:not(.disabled), button:enabled:hover {
+  background-color: var(--in-content-button-background-hover);
+}
+
+.button:hover:active:not(.disabled), button:enabled:hover:active {
+  background-color: var(--in-content-button-background-active);
+}
+.button.disabled, button:disabled {
+  opacity: 0.4;
+}
+.button.primary, button.primary {
+  background-color: var(--in-content-primary-button-background);
+  color: var(--in-content-primary-button-text-color) !important;
+}
+
+.button.primary:hover:not(.disabled), button.primary:enabled:hover {
+  background-color: var(--in-content-primary-button-background-hover);
+}
+
+.button.primary:hover:active:not(.disabled), button.primary:enabled:hover:active {
+  background-color: var(--in-content-primary-button-background-active);
+}
+.button.danger-button, button.danger-button {
+  background-color: var(--red-60);
+  color: white !important;
+}
+
+.button.danger-button:hover:not(.disabled), button.danger-button:enabled:hover {
+  background-color: var(--red-70);
+}
+
+.button.danger-button:hover:active:not(.disabled), button.danger-button:enabled:hover:active {
+  background-color: var(--red-80);
+}
+
+.card {
+  background: var(--in-content-box-background);
+  border-radius: 4px;
+  box-shadow: var(--card-shadow);
+  margin: 0 0 8px;
+  transition: box-shadow 150ms;
+  cursor: pointer;
+}
+
+.card:not(.card-no-hover):hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+textarea {
+  appearance: none;
+  border: 1px solid var(--in-content-box-border-color);
+  border-radius: 2px;
+  color: inherit;
+  background-color: var(--in-content-box-background);
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px 8px;
+  margin: 2px 4px;
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):enabled:not(:focus):hover,
+textarea:enabled:not(:focus):hover {
+  border-color: var(--in-content-border-hover);
+}
+
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+textarea:focus {
+  border-color: var(--in-content-border-active);
+  box-shadow: 0 0 0 1px var(--in-content-border-active),
+    0 0 0 4px var(--in-content-border-active-shadow);
+  outline: none;
+}
+input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):disabled,
+textarea:disabled {
+  opacity: 0.4;
+}
+
+a {
+    color: var(--in-content-link-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--in-content-link-color-hover);
+    text-decoration: underline;
+}
+a:visited {
+    color: var(--in-content-link-color-visited);
+}
+a:hover:active {
+    color: var(--in-content-link-color-active);
+    text-decoration: none;
+}
+
+/** Past here is custom styles **/
+code {
+    background-color: var(--code-background);
+    padding: 2px;
+    font-size: 10pt;
+    line-height: 18pt;
+    border-radius: 5px;
+}
+.hidden {
+    display: none;
+}

@@ -24,6 +24,7 @@ async function initNativePort(eventCallback) {
     } catch(e) {
         console.error("Native component connection failure, reconnecting...", e);
         browser.storage.local.set({[STORAGE_NATIVE_CONNECTION_STATE]: false});
+        browser.storage.local.set({[STORAGE_NATIVE_CONNECTOR_VERSION]: null});
         setTimeout(() => initNativePort(), NATIVE_RECONNECT_INTERVAL);
         return;
     }
@@ -140,22 +141,32 @@ async function nativeRequestInternal(nativePort, command, data) {
     return await nativeRequest("ListProfiles");
 }*/
 
-async function nativeLaunchProfile(profileId) {
-    return await nativeRequest("LaunchProfile", {profile_id: profileId});
+async function nativeLaunchProfile(profileId, url) {
+    return await nativeRequest("LaunchProfile", {profile_id: profileId, url});
 }
 
-async function nativeCreateProfile(profileName, profileAvatar) {
+async function nativeCreateProfile(profileName, profileAvatar, profileOptions) {
+    let options = profileOptions;
+    if(options == null)
+        options = {};
+
     return await nativeRequest("CreateProfile", {
         name: profileName,
-        avatar: profileAvatar
+        avatar: profileAvatar,
+        options
     });
 }
 
-async function nativeUpdateProfile(profileId, profileName, profileAvatar, profileDefault) {
+async function nativeUpdateProfile(profileId, profileName, profileAvatar, profileDefault, profileOptions) {
+    let options = profileOptions;
+    if(options == null)
+        options = {};
+
     return await nativeRequest("UpdateProfile", {
         profile_id: profileId,
         name: profileName,
         avatar: profileAvatar,
+        options,
         default: profileDefault
     });
 }
@@ -163,6 +174,12 @@ async function nativeUpdateProfile(profileId, profileName, profileAvatar, profil
 async function nativeDeleteProfile(profileId) {
     return await nativeRequest("DeleteProfile", {
         profile_id: profileId
+    });
+}
+
+async function nativeUpdateOptions(changes) {
+    return await nativeRequest("UpdateOptions", {
+        changes
     });
 }
 

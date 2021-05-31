@@ -2,35 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="../common.css">
 <style>
-:root {
-    --blue-60: #0060df;
-    --blue-70: #003eaa;
-    --blue-80: #002275;
-    --grey-90-a10: rgba(12, 12, 13, 0.1);
-    --grey-90-a20: rgba(12, 12, 13, 0.2);
-    --grey-90-a30: rgba(12, 12, 13, 0.3);
-
-    --in-content-selected-text: #fff;
-    --in-content-button-background: var(--grey-90-a10);
-    --in-content-button-background-hover: var(--grey-90-a20);
-    --in-content-button-background-active: var(--grey-90-a30);
-    --in-content-primary-button-background: var(--blue-60);
-    --in-content-primary-button-background-hover: var(--blue-70);
-    --in-content-primary-button-background-active: var(--blue-80);
-}
-
-html {
+/*html {
     width: 300px;
     max-width: 300px;
-}
+}*/
 html, body {
-    color: #000;
-    font-family: Roboto, Noto, "San Francisco", Ubuntu, "Segoe UI", "Fira Sans", message-box, Arial, sans-serif;
     font-size: 10pt;
-    background-color: #fefefe;
     overflow-y: auto;
-    width: 300px;
+    /*width: 300px;*/
+    min-width: 300px; /* New layout */
     max-height: 500px;
 }
 
@@ -46,6 +28,14 @@ html, body {
     border-radius: 64px;
     margin-bottom: 12px;
 }
+#update_available_button {
+    display: none;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    cursor: pointer;
+    text-align: center;
+}
 
 .profile-name {
     font-size: 14pt;
@@ -58,13 +48,15 @@ html, body {
 .section-header {
     border-top: 1px solid #d1d1d1;
     padding: 8px 16px;
-    color: #4f4f4f;
+    /*color: #4f4f4f;*/
+    color: var(--in-content-deemphasized-text);
 }
 .profile-entry {
     padding: 6px 16px;
 }
 .profile-entry:hover {
-    background-color: #e9e9e9;
+    /*background-color: #e9e9e9;*/
+    background-color: var(--button-hover-light);
 }
 .profile-entry-pic {
     float: left;
@@ -84,7 +76,7 @@ html, body {
     border-top: 1px solid #d1d1d1;
     padding-top: 8px;
     padding-bottom: 8px;
-    color: #2a2a2a;
+    /*color: #2a2a2a;*/
 }
 #profile_entries {
     overflow-wrap: break-word;
@@ -110,49 +102,12 @@ html, body {
 .warning-wrapper > button {
     cursor: pointer;
 }
-
-/* - The below CSS code is subject to the terms of the Mozilla Public
-   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/. */
-button {
-  appearance: none;
-  min-height: 32px;
-  color: inherit !important;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  background-color: var(--in-content-button-background);
-  font-weight: 400;
-  padding: 0 8px;
-  text-decoration: none;
-}
-
-button:enabled:hover {
-  background-color: var(--in-content-button-background-hover);
-}
-
-button:enabled:hover:active {
-  background-color: var(--in-content-button-background-active);
-}
-button:disabled {
-  opacity: 0.4;
-}
-button.primary {
-  background-color: var(--in-content-primary-button-background);
-  color: var(--in-content-selected-text) !important;
-}
-
-button.primary:enabled:hover {
-  background-color: var(--in-content-primary-button-background-hover);
-}
-
-button.primary:enabled:hover:active {
-  background-color: var(--in-content-primary-button-background-active);
-}
 </style>
     </head>
     <body>
         <div id="popup_content" class="popup-wrapper">
             <div class="profile-picture-wrapper">
+                <button id="update_available_button" class="primary">Update<br/>available!</button>
                 <img class="profile-picture" id="profile_current_img" src="/img/profile-user.svg"/>
                 <div class="profile-name" id="profile_current_name">Loading...</div>
             </div>
@@ -161,7 +116,7 @@ button.primary:enabled:hover:active {
             </div>
             <div id="profile_entries"></div>
             <div id="manage_button" class="profile-entry settings">
-                <img class="profile-entry-pic" src="/img/settings-gray.svg"/>
+                <img class="profile-entry-pic invert-when-dark" src="/img/settings-gray.svg"/>
                 <div class="profile-entry-name">Manage profiles</div>
                 <div class="profile-entry-float-clear"></div>
             </div>
@@ -174,6 +129,7 @@ button.primary:enabled:hover:active {
         </div>
         <script src="../common.js"></script>
         <script src="../native.js"></script>
+        <script src="../compare-versions.min.js"></script>
         <script src="popup.js"></script>
     </body>
 </html>

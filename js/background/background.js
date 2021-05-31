@@ -1,7 +1,9 @@
 async function handleEvent(event) {
     console.log("Incoming native event!", event);
 
-    if(event.event === "ProfileList") {
+    if(event.event === "ConnectorInformation") {
+        browser.storage.local.set({[STORAGE_NATIVE_CONNECTOR_VERSION]: event.version});
+    } else if(event.event === "ProfileList") {
         // Sort profiles
         event.profiles.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -18,13 +20,27 @@ async function handleEvent(event) {
             }
         }
     } else if(event.event === "FocusWindow") {
-        const curWindow = await browser.windows.getLastFocused({populate:false});
-        if(curWindow != null)
-            browser.windows.update(curWindow.id, {focused:true});
+        let windowId;
+        if(event.url != null) {
+            try {
+                const newTab = await browser.tabs.create({url: event.url});
+                windowId = newTab.windowId;
+            } catch(e) {
+                console.error("Failed to create new tab!", e);
+            }
+        } else {
+            const curWindow = await browser.windows.getLastFocused({populate:false});
+            if(curWindow != null)
+                windowId = curWindow.id;
+        }
+        if(windowId != null)
+            browser.windows.update(windowId, {focused:true});
     } else if(event.event === "CloseManager") {
         browser.runtime.sendMessage({
             type: REQUEST_TYPE_CLOSE_MANAGER
         });
+    } else if(event.event === "OptionsUpdated") {
+        browser.storage.local.set({[STORAGE_CACHE_GLOBAL_OPTIONS]: event.options});
     }
 }
 
