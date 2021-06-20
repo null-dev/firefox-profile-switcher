@@ -57,7 +57,10 @@ function postInit(browserName, platform, arch) {
     // Inject compile instructions
     const compileInstructions = document.getElementById("compile_instructions");
     for(const compileTarget of document.querySelectorAll(".compile.instructions")) {
-        compileTarget.innerHTML = compileInstructions.innerHTML;
+        while (compileTarget.firstChild) { compileTarget.removeChild(compileTarget.lastChild); } // clear
+        for(const child of compileInstructions.content.children) {
+            compileTarget.appendChild(child.cloneNode(true));
+        }
     }
 
     for(const element of document.querySelectorAll(".advanced-only")) {

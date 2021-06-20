@@ -92,6 +92,7 @@ async function fetchAndRoundAvatarAsCanvas(url) {
 // Dark mode
 let profileDarkMode = false;
 let globalDarkMode = false;
+let darkModeListeners = [];
 function updateDarkMode() {
     let dark;
     if(globalDarkMode != null) {
@@ -106,6 +107,7 @@ function updateDarkMode() {
     } else {
         document.documentElement.classList.remove("dark-mode");
     }
+    for(const listener of darkModeListeners) listener(dark);
 }
 subscribeToProfileList(profiles => {
     if(profiles != null) {
