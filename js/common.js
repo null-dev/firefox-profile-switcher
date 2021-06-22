@@ -8,6 +8,8 @@ const STORAGE_NATIVE_CONNECTOR_VERSION = "native.connector-version";
 const STORAGE_CACHE_PROFILE_LIST_KEY = "cache.profile-list";
 const STORAGE_CACHE_GLOBAL_OPTIONS = "cache.global-options";
 
+const EXTENSION_ID = browser.i18n.getMessage("@@extension_id");
+
 const DEFAULT_GLOBAL_OPTIONS = {
     darkMode: null
 };

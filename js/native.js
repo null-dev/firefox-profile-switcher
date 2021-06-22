@@ -63,7 +63,7 @@ async function initNativePort(eventCallback) {
         }
     }
     nativeRequestInternal(nativePort, "Initialize", {
-        extension_id: browser.i18n.getMessage("@@extension_id"),
+        extension_id: EXTENSION_ID,
         profile_id: curProfileId
     }).then(result => {
         console.debug("Native component initialization complete!", result);

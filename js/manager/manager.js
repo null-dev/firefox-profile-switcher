@@ -337,6 +337,7 @@ const settingsPageSaveButton = document.getElementById("settings_page_save_butto
 
 const settingsPageDarkModeInput = document.getElementById("settings_page_dark_mode_input");
 const settingsPageDarkModeAllInput = document.getElementById("settings_page_dark_mode_all_input");
+const settingsPageWindowFocusWorkaroundInput = document.getElementById("settings_page_window_focus_workaround_input");
 
 function serializeSettings() {
     const profile = {};
@@ -345,6 +346,7 @@ function serializeSettings() {
     // Dark mode
     profile.darkMode = settingsPageDarkModeInput.checked;
     global.darkMode = settingsPageDarkModeAllInput.checked ? profile.darkMode : null;
+    global.windowFocusWorkaround = settingsPageWindowFocusWorkaroundInput.checked;
 
     return { profile, global };
 }
@@ -352,6 +354,7 @@ function serializeSettings() {
 function deserializeSettings(profile, global) {
     settingsPageDarkModeInput.checked = global.darkMode != null ? global.darkMode : profile.darkMode;
     settingsPageDarkModeAllInput.checked = global.darkMode != null;
+    settingsPageWindowFocusWorkaroundInput.checked = global.windowFocusWorkaround === true;
 }
 
 settingsPageCancelButton.addEventListener('click', () => {

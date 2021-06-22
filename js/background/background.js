@@ -45,3 +45,10 @@ async function handleEvent(event) {
 }
 
 initNative(handleEvent);
+
+// Listen for when the winfocus page is launched and close it as fast as possible
+browser.tabs.onCreated.addListener(function(tab) {
+    if(tab.title === EXTENSION_ID + "/js/winfocus/winfocus.html") {
+        browser.tabs.remove(tab.id);
+    }
+});

@@ -250,6 +250,12 @@ html, body {
 .setting-indent-1 > label {
     padding-top: 0;
 }
+.control-page.settings-page .control-page-scroll > div:not(:first-child):not(.setting-indent-1) {
+    border-top: 1px solid #d1d1d1;
+}
+.control-page.settings-page .control-page-scroll > div > p {
+    margin-top: 0;
+}
 </style>
     </head>
     <body>
@@ -305,6 +311,11 @@ html, body {
                         <div class="setting-indent-1">
                             <label for="settings_page_dark_mode_all_input">Apply in all profiles:</label>
                             <input id="settings_page_dark_mode_all_input" type="checkbox" />
+                        </div>
+                        <div>
+                            <label for="settings_page_window_focus_workaround_input">Window focus workaround:</label>
+                            <input id="settings_page_window_focus_workaround_input" type="checkbox" />
+                            <p>Enable this if you aren't able to switch between open profiles.</p>
                         </div>
                     </div>
                 </div>
