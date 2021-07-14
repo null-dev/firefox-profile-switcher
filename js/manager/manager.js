@@ -237,7 +237,7 @@ editPageMakeDefaultButton.addEventListener('click', async () => {
     if(editingProfile != null && editingOriginalProfile != null) {
         try {
             // Update
-            await nativeUpdateProfile(editingOriginalProfile.id, editingOriginalProfile.name, editingOriginalProfile.avatar, true, editingProfileSave.options);
+            await nativeUpdateProfile(editingOriginalProfile.id, editingOriginalProfile.name, editingOriginalProfile.avatar, true, editingOriginalProfile.options);
 
             // Saved
             editingProfile.default = true;
