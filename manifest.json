@@ -25,7 +25,7 @@
   },
   "commands": {
     "_execute_browser_action": {
-      "suggested_key": { "default": "Ctrl+Shift+U" },
+      "suggested_key": { "default": "Ctrl+Alt+U" },
       "description": "Send a 'toggle-feature' event to the extension"
     }
   },
