@@ -26,7 +26,7 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": { "default": "Ctrl+Alt+U" },
-      "description": "Send a 'toggle-feature' event to the extension"
+      "description": "Open Profile Switcher Addon"
     }
   },
   "browser_specific_settings": {
