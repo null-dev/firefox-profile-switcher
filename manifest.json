@@ -24,7 +24,7 @@
     "page": "js/background/index.html"
   },
   "commands": {
-    "toggle-feature": {
+    "_execute_browser_action": {
       "suggested_key": { "default": "Ctrl+Shift+U" },
       "description": "Send a 'toggle-feature' event to the extension"
     }
