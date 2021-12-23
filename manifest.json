@@ -23,6 +23,12 @@
   "background": {
     "page": "js/background/index.html"
   },
+  "commands": {
+    "toggle-feature": {
+      "suggested_key": { "default": "Ctrl+Shift+U" },
+      "description": "Send a 'toggle-feature' event to the extension"
+    }
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "profile-switcher-ff@nd.ax"
