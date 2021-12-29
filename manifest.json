@@ -23,6 +23,12 @@
   "background": {
     "page": "js/background/index.html"
   },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": { "default": "Ctrl+Alt+U" },
+      "description": "Open Profile Switcher Addon"
+    }
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "profile-switcher-ff@nd.ax"
