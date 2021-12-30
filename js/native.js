@@ -38,7 +38,7 @@ async function initNativePort(eventCallback) {
         }
     });
     function onNativeDisconnect(p) {
-        console.error("Native component disconnected, reconnecting...", p);
+        console.error("Native component disconnected, reconnecting...", p, p.error);
         nativePort = null;
         let handlersToCall = [];
         for (const handler of Object.values(waitingNativeReqs)) {
