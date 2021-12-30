@@ -2,7 +2,7 @@
 {
   "manifest_version": 2,
   "name": "Profile Switcher for Firefox",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "Create, manage and switch between browser profiles seamlessly.",
   "homepage_url": "https://github.com/null-dev/firefox-profile-switcher",
   "permissions": [
