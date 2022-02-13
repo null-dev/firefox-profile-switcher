@@ -105,6 +105,11 @@ html, body {
 .warning-wrapper > button {
     cursor: pointer;
 }
+.warning-help-link {
+    text-align: center;
+    font-size: 0.8em;
+    margin-bottom: 0;
+}
 </style>
     </head>
     <body>
@@ -129,6 +134,9 @@ html, body {
             <h1 class="warning-header">Setup incomplete!</h1>
             <p class="warning-message">This extension requires extra software to function, please follow the link below to install the software.</p>
             <button id="complete_setup_button" class="primary">Complete setup</button>
+            <p class="warning-help-link">
+                <a href="https://github.com/null-dev/firefox-profile-switcher/issues/new">Having trouble? Open a Github issue!</a>
+            </p>
         </div>
         <script src="../common.js"></script>
         <script src="../native.js"></script>
