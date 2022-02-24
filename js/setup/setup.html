@@ -53,9 +53,17 @@
                           <li><b>If you have an older version of the software component installed and are upgrading it</b>, use this command instead: <code>brew upgrade firefox-profile-switcher-connector</code></li>
                       </ul>
                   </li>
-                  <li>The output from the above command will give you two more commands you need to run, run those commands.</li>
+                  <li>The output from the above command will give you two more commands you need to run, make sure you run those commands.</li>
                   <li>Restart your browser.</li>
-                  <li>The extension should work now!</li>
+                  <li>
+                      The extension should work now!
+                  </li>
+                  <li>
+                      If the extension still does not work, you can try running the following commands:
+<pre><code class="language-bash hljs">sudo <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">"/Library/Application Support/Mozilla/NativeMessagingHosts"</span>
+sudo <span class="hljs-built_in">ln</span> -sf <span class="hljs-string">"<span class="hljs-subst">$(brew ls -l firefox-profile-switcher-connector | grep -i ax.nd.profile_switcher_ff.json | head -n1)</span>"</span> <span class="hljs-string">"/Library/Application Support/Mozilla/NativeMessagingHosts"</span>/ax.nd.profile_switcher_ff.json
+</code></pre>
+                  </li>
               </ol>
           </div>
           <div class="instructions linux">
