@@ -60,10 +60,61 @@
           </div>
           <div class="instructions linux">
               <h3>Instructions for Linux</h3>
-              <p>
+
+              <p id="linux_flatpak_select_wrapper">
+                  Are you running Firefox with Flatpak? Check by typing <code>about:support</code> into the address bar, hit ENTER and see if on the resulting page the <code>Distribution ID</code> says <code>mozilla-flatpak</code>:
+                  <input type="radio" id="linux_flatpak_yes" name="linux_flatpak" value="yes" autocomplete="off">
+                  <label for="linux_flatpak_yes">Yes</label>
+                  <input type="radio" id="linux_flatpak_no" name="linux_flatpak" value="no" autocomplete="off">
+                  <label for="linux_flatpak_no">No</label>
+              </p>
+              <div class="flatpak">
+                  <p id="linux_flatpak_arch_select_wrapper" class="advanced-only">
+                      Please select the architecture your system uses:
+                      <input type="radio" id="linux_flatpak_arch_x86-64" name="linux_flatpak_arch" value="x86-64" autocomplete="off">
+                      <label for="linux_flatpak_arch_x86-64">64-bit</label>
+                      <input type="radio" id="linux_flatpak_arch_x86-32" name="linux_flatpak_arch" value="x86-32" autocomplete="off">
+                      <label for="linux_flatpak_arch_x86-32">32-bit</label>
+                  </p>
+
+                  Run the following shell script to install the connector software (you need to have the <code>ar</code>, <code>tar</code> and <code>curl</code> commands on your system):
+
+                  <pre><code class="language-bash hljs"><span class="hljs-meta">#!/bin/sh</span>
+BASE_DIR=<span class="hljs-string">"<span class="hljs-variable">$HOME</span>/.var/app/org.mozilla.firefox"</span>
+BIN_INSTALL_DIR=<span class="hljs-string">"<span class="hljs-variable">$BASE_DIR</span>/data/firefoxprofileswitcher-install"</span>
+MANIFEST_INSTALL_DIR=<span class="hljs-string">"<span class="hljs-variable">$BASE_DIR</span>/.mozilla/native-messaging-hosts"</span>
+DOWNLOAD_URL=<span class="hljs-string">"https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/linux-<span class="flatpak-arch x86-64">x64</span><span class="flatpak-arch x86-32">x86</span>.deb"</span>
+
+<span class="hljs-comment"># Download and install the binary</span>
+<span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">"<span class="hljs-variable">$BIN_INSTALL_DIR</span>"</span>
+TMP_FILE=<span class="hljs-string">"<span class="hljs-subst">$(mktemp)</span>"</span>
+curl -L <span class="hljs-string">"<span class="hljs-variable">$DOWNLOAD_URL</span>"</span> -o <span class="hljs-string">"<span class="hljs-variable">$TMP_FILE</span>"</span>
+ar p <span class="hljs-string">"<span class="hljs-variable">$TMP_FILE</span>"</span> data.tar.xz | tar xfJ - --strip-components=2 -C <span class="hljs-string">"<span class="hljs-variable">$BIN_INSTALL_DIR</span>"</span> usr/bin/ff-pswitch-connector
+<span class="hljs-built_in">rm</span> <span class="hljs-string">"<span class="hljs-variable">$TMP_FILE</span>"</span>
+
+<span class="hljs-comment"># Install the manifest (used by Firefox to locate the binary)</span>
+<span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">"<span class="hljs-variable">$MANIFEST_INSTALL_DIR</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">'
+{
+    "allowed_extensions": [
+        "profile-switcher-ff@nd.ax"
+    ],
+    "description": "Profile Switcher for Firefox",
+    "name": "ax.nd.profile_switcher_ff",
+    "path": "'</span><span class="hljs-string">"<span class="hljs-variable">$BIN_INSTALL_DIR</span>"</span><span class="hljs-string">'/ff-pswitch-connector",
+    "type": "stdio"
+}
+'</span> &gt; <span class="hljs-string">"<span class="hljs-variable">$MANIFEST_INSTALL_DIR</span>/ax.nd.profile_switcher_ff.json"</span>
+</code></pre>
+              </div>
+
+
+              <p id="distribution_select_wrapper">
                   What Linux distribution are you running?
                   &nbsp;
-                  <select id="distribution_select">
+                  <select id="distribution_select" autocomplete="off">
+                      <option value="no-distribution" selected hidden></option>
+
                       <!-- Debian based -->
                       <option value="ubuntu">Ubuntu</option>
                       <option value="debian">Debian</option>
