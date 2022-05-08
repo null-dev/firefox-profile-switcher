@@ -76,44 +76,25 @@ sudo <span class="hljs-built_in">ln</span> -sf <span class="hljs-string">"<span 
                   <input type="radio" id="linux_flatpak_no" name="linux_flatpak" value="no" autocomplete="off">
                   <label for="linux_flatpak_no">No</label>
               </p>
-              <div class="flatpak">
-                  <p id="linux_flatpak_arch_select_wrapper" class="advanced-only">
+              <p id="linux_snap_select_wrapper">
+                  Are you running Firefox with Snap? Check by typing <code>about:support</code> into the address bar, hit ENTER and see if on the resulting page the <code>Application Binary</code> starts with <code>/snap</code>:
+                  <input type="radio" id="linux_snap_yes" name="linux_snap" value="yes" autocomplete="off">
+                  <label for="linux_snap_yes">Yes</label>
+                  <input type="radio" id="linux_snap_no" name="linux_snap" value="no" autocomplete="off">
+                  <label for="linux_snap_no">No</label>
+              </p>
+              <div class="home-install">
+                  <p id="linux_home_arch_select_wrapper" class="advanced-only">
                       Please select the architecture your system uses:
-                      <input type="radio" id="linux_flatpak_arch_x86-64" name="linux_flatpak_arch" value="x86-64" autocomplete="off">
-                      <label for="linux_flatpak_arch_x86-64">64-bit</label>
-                      <input type="radio" id="linux_flatpak_arch_x86-32" name="linux_flatpak_arch" value="x86-32" autocomplete="off">
-                      <label for="linux_flatpak_arch_x86-32">32-bit</label>
+                      <input type="radio" id="linux_home_arch_x86-64" name="linux_home_arch" value="x86-64" autocomplete="off">
+                      <label for="linux_home_arch_x86-64">64-bit</label>
+                      <input type="radio" id="linux_home_arch_x86-32" name="linux_home_arch" value="x86-32" autocomplete="off">
+                      <label for="linux_home_arch_x86-32">32-bit</label>
                   </p>
 
                   Run the following shell script to install the connector software (you need to have the <code>ar</code>, <code>tar</code> and <code>curl</code> commands on your system):
 
-                  <pre><code class="language-bash hljs"><span class="hljs-meta">#!/bin/sh</span>
-BASE_DIR=<span class="hljs-string">"<span class="hljs-variable">$HOME</span>/.var/app/org.mozilla.firefox"</span>
-BIN_INSTALL_DIR=<span class="hljs-string">"<span class="hljs-variable">$BASE_DIR</span>/data/firefoxprofileswitcher-install"</span>
-MANIFEST_INSTALL_DIR=<span class="hljs-string">"<span class="hljs-variable">$BASE_DIR</span>/.mozilla/native-messaging-hosts"</span>
-DOWNLOAD_URL=<span class="hljs-string">"https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/linux-<span class="flatpak-arch x86-64">x64</span><span class="flatpak-arch x86-32">x86</span>.deb"</span>
-
-<span class="hljs-comment"># Download and install the binary</span>
-<span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">"<span class="hljs-variable">$BIN_INSTALL_DIR</span>"</span>
-TMP_FILE=<span class="hljs-string">"<span class="hljs-subst">$(mktemp)</span>"</span>
-curl -L <span class="hljs-string">"<span class="hljs-variable">$DOWNLOAD_URL</span>"</span> -o <span class="hljs-string">"<span class="hljs-variable">$TMP_FILE</span>"</span>
-ar p <span class="hljs-string">"<span class="hljs-variable">$TMP_FILE</span>"</span> data.tar.xz | tar xfJ - --strip-components=2 -C <span class="hljs-string">"<span class="hljs-variable">$BIN_INSTALL_DIR</span>"</span> usr/bin/ff-pswitch-connector
-<span class="hljs-built_in">rm</span> <span class="hljs-string">"<span class="hljs-variable">$TMP_FILE</span>"</span>
-
-<span class="hljs-comment"># Install the manifest (used by Firefox to locate the binary)</span>
-<span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">"<span class="hljs-variable">$MANIFEST_INSTALL_DIR</span>"</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">'
-{
-    "allowed_extensions": [
-        "profile-switcher-ff@nd.ax"
-    ],
-    "description": "Profile Switcher for Firefox",
-    "name": "ax.nd.profile_switcher_ff",
-    "path": "'</span><span class="hljs-string">"<span class="hljs-variable">$BIN_INSTALL_DIR</span>"</span><span class="hljs-string">'/ff-pswitch-connector",
-    "type": "stdio"
-}
-'</span> &gt; <span class="hljs-string">"<span class="hljs-variable">$MANIFEST_INSTALL_DIR</span>/ax.nd.profile_switcher_ff.json"</span>
-</code></pre>
+                  <div class="instructions"></div>
               </div>
 
 
@@ -204,7 +185,37 @@ ar p <span class="hljs-string">"<span class="hljs-variable">$TMP_FILE</span>"</s
                   <li>Restart your browser.</li>
               </ol>
           </template>
+	  <template id="home_install_instructions">
+	      <pre><code class="language-bash">#!/bin/sh
+BASE_DIR="$HOME<span class="home-type flatpak">/.var/app/org.mozilla.firefox</span><span class="home-type snap">/snap/firefox/common</span>"
+BIN_INSTALL_DIR="$BASE_DIR<span class="home-type flatpak">/data/firefoxprofileswitcher-install</span><span class="home-type snap">/firefoxprofileswitcher-install</span>"
+MANIFEST_INSTALL_DIR="$BASE_DIR/.mozilla/native-messaging-hosts"
+DOWNLOAD_URL="https://github.com/null-dev/firefox-profile-switcher-connector/releases/latest/download/linux-<span class="home-arch x86-64">x64</span><span class="home-arch x86-32">x86</span>.deb"
+
+# Download and install the binary
+mkdir -p "$BIN_INSTALL_DIR"
+TMP_FILE="$(mktemp)"
+curl -L "$DOWNLOAD_URL" -o "$TMP_FILE"
+ar p "$TMP_FILE" data.tar.xz | tar xfJ - --strip-components=2 -C "$BIN_INSTALL_DIR" usr/bin/ff-pswitch-connector
+rm "$TMP_FILE"
+
+# Install the manifest (used by Firefox to locate the binary)
+mkdir -p "$MANIFEST_INSTALL_DIR"
+echo '
+{
+    "allowed_extensions": [
+        "profile-switcher-ff@nd.ax"
+    ],
+    "description": "Profile Switcher for Firefox",
+    "name": "ax.nd.profile_switcher_ff",
+    "path": "'"$BIN_INSTALL_DIR"'/ff-pswitch-connector",
+    "type": "stdio"
+}
+' &gt; "$MANIFEST_INSTALL_DIR/ax.nd.profile_switcher_ff.json"
+</code></pre>
+          </template>
       </div>
+      <script src="../lib/highlight.min.js"></script>
       <script src="../common.js"></script>
       <script src="../native.js"></script>
       <script src="setup.js"></script>

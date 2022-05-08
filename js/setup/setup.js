@@ -1,8 +1,12 @@
 const distDropdown = document.getElementById("distribution_select");
 const distDropdownWrapper = document.getElementById("distribution_select_wrapper");
 const linuxFlatpakSelectWrapper = document.getElementById("linux_flatpak_select_wrapper");
-const linuxFlatpakArchSelectWrapper = document.getElementById("linux_flatpak_arch_select_wrapper");
+const linuxSnapSelectWrapper = document.getElementById("linux_snap_select_wrapper");
+const linuxHomeArchSelectWrapper = document.getElementById("linux_home_arch_select_wrapper");
 const archList = ["x86-64", "x86-32", "arm", "other"];
+let flatpak = null;
+let snap = null;
+let homeInstallArch = null;
 async function init() {
     const platformInfo = await browser.runtime.getPlatformInfo(); 
     const browserInfo = await browser.runtime.getBrowserInfo();
@@ -13,24 +17,20 @@ async function init() {
     if(!archList.includes(arch))
         arch = "other";
 
-    linuxFlatpakArchSelectWrapper.onchange = e => {
-        if(e.target.name === 'linux_flatpak_arch') {
-            for(const element of document.querySelectorAll(".content > .instructions .flatpak-arch")) {
-                element.classList.add("hidden");
-            }
-            for(const element of document.querySelectorAll(".content > .instructions .flatpak-arch." + e.target.value)) {
-                element.classList.remove("hidden");
-            }
+    linuxHomeArchSelectWrapper.onchange = e => {
+        if(e.target.name === 'linux_home_arch') {
+            homeInstallArch = e.target.value;
+            updateHomeInstallInstructions();
         }
     };
-    const flatpakArchElement = document.getElementById("linux_flatpak_arch_" + arch);
-    flatpakArchElement.checked = true;
-    flatpakArchElement.dispatchEvent(new Event('change', { bubbles: true })); // Trigger onchange
+    const homeArchElement = document.getElementById("linux_home_arch_" + arch);
+    homeArchElement.checked = true;
+    homeArchElement.dispatchEvent(new Event('change', { bubbles: true })); // Trigger onchange
 
-    postInit(browserName, platform, arch, null);
+    postInit(browserName, platform, arch);
 }
 
-function postInit(browserName, platform, arch, flatpak) {
+function postInit(browserName, platform, arch) {
     // TODO Handle different browser
     
     const advanced = window.location.hash === "#advanced";
@@ -98,19 +98,59 @@ function postInit(browserName, platform, arch, flatpak) {
 
     linuxFlatpakSelectWrapper.onchange = e => {
         if(e.target.name === 'linux_flatpak') {
-            postInit(browserName, platform, arch, e.target.value === "yes");
+            flatpak = e.target.value === "yes";
+            snap = null;
+            postInit(browserName, platform, arch);
+        }
+    };
+    linuxSnapSelectWrapper.onchange = e => {
+        if(e.target.name === 'linux_snap') {
+            snap = e.target.value === "yes";
+            postInit(browserName, platform, arch);
         }
     };
 
-    const showLinuxDist = flatpak === false;
+    updateHomeInstallInstructions();
+
+    const showLinuxDist = flatpak === false && snap === false;
+    const showHomeInstall = flatpak === true || snap === true;
     distDropdownWrapper.classList[showLinuxDist ? "remove" : "add"]("hidden");
-    for(const element of document.querySelectorAll(".content > .instructions .flatpak")) {
-        element.classList[flatpak === true ? "remove" : "add"]("hidden");
+    linuxSnapSelectWrapper.classList[flatpak === false ? "remove" : "add"]("hidden");
+    for(const element of document.querySelectorAll(".content > .instructions .home-install")) {
+        element.classList[showHomeInstall ? "remove" : "add"]("hidden");
     }
 
-    window.onhashchange = () => postInit(browserName, platform, arch, flatpak);
+    window.onhashchange = () => postInit(browserName, platform, arch);
     distDropdown.onchange = () => updateLinuxDist(showLinuxDist);
     updateLinuxDist(showLinuxDist);
+}
+
+function updateHomeInstallInstructions() {
+    // Inject home-install instructions
+    const homeInstallInstructions = document.getElementById("home_install_instructions");
+    for(const homeInstallTarget of document.querySelectorAll(".home-install > .instructions")) {
+        while (homeInstallTarget.firstChild) { homeInstallTarget.removeChild(homeInstallTarget.lastChild); } // clear
+        for(const child of homeInstallInstructions.content.children) {
+            homeInstallTarget.appendChild(child.cloneNode(true));
+        }
+        // Update text to match arch
+        if(homeInstallArch != null) {
+            for(const element of homeInstallTarget.querySelectorAll(".home-arch:not(." + homeInstallArch + ")")) {
+                element.remove();
+            }
+        }
+        // Update text to match type
+        for(const element of homeInstallTarget.querySelectorAll(".home-type.snap")) {
+            if(snap !== true) element.remove();
+        }
+        for(const element of homeInstallTarget.querySelectorAll(".home-type.flatpak")) {
+            if(flatpak !== true) element.remove();
+        }
+        // Highlight code
+        for(const preCode of homeInstallTarget.querySelectorAll("pre > code")) {
+            hljs.highlightElement(preCode);
+        }
+    }
 }
 
 function updateLinuxDist(show) {
