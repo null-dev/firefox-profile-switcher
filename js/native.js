@@ -24,6 +24,7 @@ async function initNativePort(eventCallback) {
         console.log("Native connection established!");
     } catch(e) {
         console.error("Native component connection failure, reconnecting...", e);
+
         browser.storage.local.set({[STORAGE_NATIVE_CONNECTION_STATE]: false});
         browser.storage.local.set({[STORAGE_NATIVE_CONNECTOR_VERSION]: null});
         setTimeout(() => initNativePort(), NATIVE_RECONNECT_INTERVAL);
@@ -41,10 +42,7 @@ async function initNativePort(eventCallback) {
         console.error("Native component disconnected, reconnecting...", p, p.error);
         nativePort = null;
         // Clear all handlers
-        let handlersToCall = [];
-        for (const handler of Object.values(waitingNativeReqs)) {
-            handlersToCall.push(handler);
-        }
+        let handlersToCall = Object.values(waitingNativeReqs);
         waitingNativeReqs = {};
         for(const handler of handlersToCall) {
             handler({success: false, error: "The extension got disconnected from it's connector!"});
