@@ -35,7 +35,8 @@ async function initNativePort(eventCallback) {
             eventCallback(resp.resp);
         } else {
             const handler = waitingNativeReqs[resp.id];
-            handler(resp.resp);
+            if(handler != null)
+                handler(resp.resp);
         }
     });
     function onNativeDisconnect(p) {
