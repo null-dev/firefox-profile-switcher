@@ -3,6 +3,7 @@ const REQUEST_TYPE_NATIVE = "nativeRequest";
 const NATIVE_NAME = "ax.nd.profile_switcher_ff";
 
 const NATIVE_RECONNECT_INTERVAL = 5000;
+const NATIVE_REQUEST_TIMEOUT = 1000 * 60; // 1 min
 
 class NativeException {
     constructor(message) {
@@ -33,13 +34,13 @@ async function initNativePort(eventCallback) {
             eventCallback(resp.resp);
         } else {
             const handler = waitingNativeReqs[resp.id];
-            delete waitingNativeReqs[resp.id];
             handler(resp.resp);
         }
     });
     function onNativeDisconnect(p) {
         console.error("Native component disconnected, reconnecting...", p, p.error);
         nativePort = null;
+        // Clear all handlers
         let handlersToCall = [];
         for (const handler of Object.values(waitingNativeReqs)) {
             handlersToCall.push(handler);
@@ -113,14 +114,13 @@ async function nativeRequestInternal(nativePort, command, data) {
     const startTime = new Date().getTime();
     const reqId = ++lastNativeReqId;
 
-    return new Promise((resolve, reject) => {
+    const response = new Promise((resolve, reject) => {
         waitingNativeReqs[reqId] = resp => {
             console.debug("Got native response in: " + (new Date().getTime() - startTime) + "ms.");
             if(resp.success) {
                 delete resp.success;
                 resolve(resp);
             } else {
-                console.error("Native error!", resp);
                 reject(new NativeException(resp.error));
             }
         };
@@ -131,10 +131,23 @@ async function nativeRequestInternal(nativePort, command, data) {
                 msg: builtReq
             });
         } catch(e) {
-            delete waitingNativeReqs[reqId];
             reject(e);
         }
     });
+    const timeout = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new NativeException("The operation took too long to complete!"));
+        }, NATIVE_REQUEST_TIMEOUT);
+    });
+
+    try {
+        return await Promise.race([response, timeout]);
+    } catch(e) {
+        console.error("Native error!", e);
+        throw e;
+    } finally {
+        delete waitingNativeReqs[reqId];
+    }
 }
 
 /*async function nativeListProfiles() {
@@ -186,3 +199,5 @@ async function nativeUpdateOptions(changes) {
 async function nativeCloseManager() {
     return await nativeRequest("CloseManager", {});
 }
+
+/* vim: set ts=4 sw=4 sts=4 et : */
