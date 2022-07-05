@@ -1,64 +1,43 @@
-# firefox-profile-switcher
+# Profile Switcher for Firefox
 
-This template should help get you started developing a svelte web extension in Vite.
+Create, edit, delete and switch between browser profiles seamlessly in Firefox. Inspired by Chrome's profile switcher.
 
-## Usage Notes
+## Installation
 
-The extension manifest is defined in `src/manifest.js` and used by `@samrum/vite-plugin-web-extension` in the vite config.
+[![Screenshot of popup](branding/amo_button.png)](https://addons.mozilla.org/en-CA/firefox/addon/profile-switcher/)
 
-Background, content scripts, options, and popup entry points exist in the `src/entries` directory. 
+The extension requires installation of extra software. You will be prompted to install the software after you have installed the extension.
 
-Content scripts are rendered by `src/entries/contentScript/renderContent.js` which renders content within a ShadowRoot
-and handles style injection for HMR and build modes.
+## Features
 
-Otherwise, the project functions just like a regular Vite project.
+- Create, edit, delete and change your default profile
+- Switch between profiles in the toolbar
+- Choose from a variety of different profile pictures including both the current pictures included with Chrome along with the old pictures that are no longer available in Chrome.
 
+## Screenshots
 
+Switch to another browser profile with 2 clicks:
 
+![Screenshot of popup](branding/popup_screenshot.png)
 
+Create, edit, delete and change your default profile:
 
-Refer to [@samrum/vite-plugin-web-extension](https://github.com/samrum/vite-plugin-web-extension) for more usage notes.
+![Screenshot of popup](branding/manager_home_screenshot.png)
 
-## Customize configuration
+## How does it work?
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Browser extensions do not have the ability to manage browser profiles. Instead the extension talks to a native program which has the ability to manipulate the browser folders (source code here: https://github.com/null-dev/firefox-profile-switcher-connector).
 
-## Project Setup
+## Credits
 
-```sh
-npm install
-```
+Thanks to the authors of the Chromium project for creating the beautiful profile images.
 
-## Commands
-### Build
-#### Development, HMR
+Thanks to Mozilla for making this great browser and for creating the design language that this extension uses.
 
-Hot Module Reloading is used to load changes inline without requiring extension rebuilds and extension/page reloads
-```sh
-npm run dev
-```
+## License
 
-#### Development, Watch
+The extension and native program are licensed under GPL v3.
 
-Rebuilds extension on file changes. Requires a reload of the extension (and page reload if using content scripts)
-```sh
-npm run watch
-```
+The profile pictures were created by the Chromium authors and are licensed under the Chromium license, see: https://github.com/null-dev/firefox-profile-switcher/blob/master/img/avatars/LICENSE.txt.
 
-#### Production
-
-Minifies and optimizes extension build
-```sh
-npm run build
-```
-
-### Load extension in browser
-
-Loads the contents of the dist directory into the specified browser
-```sh
-npm run serve:chrome
-```
-
-```sh
-npm run serve:firefox
-```
+Some of the CSS used in this extension were developed by Mozilla and are licensed under MPL v2.
