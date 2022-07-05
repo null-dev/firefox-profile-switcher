@@ -1,1 +1,5 @@
-/web-ext-artifacts/ 
+/dist
+/node_modules
+.DS_Store
+/web-ext-artifacts
+/.idea
