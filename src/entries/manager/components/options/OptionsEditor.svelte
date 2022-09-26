@@ -3,7 +3,7 @@
         padding-left: 20px;
     }
     .options-editor-content > div:not(:first-child):not(.setting-indent-1) {
-        border-top: 1px solid #d1d1d1;
+        border-top: 1px solid var(--in-content-button-background);
     }
     .options-editor-content > div > p {
         margin-top: 0;
