@@ -44,12 +44,11 @@ const unsortedProfileListStore: Readable<ProfileList | null> = storageKeyStore('
 export const profileListStore: Readable<ProfileList | null> = derived(
     [unsortedProfileListStore, profileOrderStore],
     ([profileList, profileOrder]) => {
-        if(profileList == null) {
+        // Only produce result when both profile list store and profile order store are ready
+        // This prevents animations from playing when the ProfileList first starts up
+        if(profileList == null || profileOrder == null) {
             return null;
         } else {
-            if(profileOrder == null)
-                profileOrder = [];
-
             const lookup = {};
             profileOrder.forEach((id, idx) => {
                 lookup[id] = idx;

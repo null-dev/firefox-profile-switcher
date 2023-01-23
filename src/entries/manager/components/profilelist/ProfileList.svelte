@@ -138,7 +138,6 @@ function scrollTo(node: HTMLElement, scrollTo: boolean) {
     {#each profilesDisplay as profile (profile.id)}
         <!--            <div transition:slide|local={{delay: 250}}>-->
         <!--            <div animate:flip={{duration:flipDurationMs}} transition:scale|local={{delay: 250}}>-->
-        <!-- TODO: Fix flip animation playing when manager is first opened -->
         <!-- TODO: Bring back transition using custom code: https://svelte.dev/repl/3f1e68203ef140969a8240eba3475a8d?version=3.55.1 -->
         <div animate:flip={{duration:flipDurationMs}} use:scrollTo={profile.id === $newProfileEvent}>
             <ProfileCard {profile}
