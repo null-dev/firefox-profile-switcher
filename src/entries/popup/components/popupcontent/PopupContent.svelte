@@ -47,7 +47,8 @@
     import settingsIcon from "~/assets/settings-gray.svg";
     import {resolveAsset} from "~/lib/utils";
     import type {ProfileList} from "~/lib/model/profiles";
-    import {buildSearchEngine, SearchEngine, SearchResult} from "./search";
+    import {buildSearchEngine} from "./search";
+    import type {SearchEngine, SearchResult} from "./search";
     import {loadAvatarIntoImageAction, REQUEST_TYPE_CLOSE_MANAGER} from "~/lib/common";
     import {nativeCloseManager, nativeLaunchProfile} from "~/lib/native";
     import browser from "webextension-polyfill";

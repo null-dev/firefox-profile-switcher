@@ -1,8 +1,11 @@
-import LazyLoad, {ILazyLoad, ILazyLoadInstance} from "vanilla-lazyload";
+import LazyLoad from "vanilla-lazyload";
+import type {ILazyLoadInstance} from "vanilla-lazyload";
 import browser from "webextension-polyfill";
 import {nativeGetAvatar} from "~/lib/native";
-import {derived, Readable, readable} from "svelte/store";
-import {defaultGlobalOptions, ProfileList} from "~/lib/model/profiles";
+import {derived, readable} from "svelte/store";
+import type {Readable} from "svelte/store";
+import {defaultGlobalOptions} from "~/lib/model/profiles";
+import type {ProfileList, ProfileOrder} from "~/lib/model/profiles";
 
 export const RECOMMENDED_CONNECTOR_VERSION = "0.0.9";
 
@@ -11,9 +14,10 @@ export const REQUEST_TYPE_CLOSE_MANAGER = "closeManager";
 export const STORAGE_NATIVE_INIT = "native.init";
 export const STORAGE_NATIVE_CONNECTION_STATE = "native.connected";
 export const STORAGE_NATIVE_CONNECTOR_VERSION = "native.connector-version";
-export const STORAGE_CACHE_PROFILE_LIST_KEY = "cache.profile-list";
+export const STORAGE_CACHE_PROFILE_LIST = "cache.profile-list";
 export const STORAGE_CACHE_GLOBAL_OPTIONS = "cache.global-options";
 export const STORAGE_CACHE_CUSTOM_AVATARS = "cache.custom-avatars";
+export const STORAGE_CACHE_PROFILE_ORDER = "cache.profile-order";
 
 export const EXTENSION_ID = browser.i18n.getMessage("@@extension_id");
 
@@ -35,7 +39,33 @@ function storageKeyStore(storageType, key, deriver?): Readable<any | null> {
     });
 }
 
-export const profileListStore: Readable<ProfileList | null> = storageKeyStore('local', STORAGE_CACHE_PROFILE_LIST_KEY);
+const profileOrderStore: Readable<ProfileOrder> = storageKeyStore('local', STORAGE_CACHE_PROFILE_ORDER, o => o ?? []);
+const unsortedProfileListStore: Readable<ProfileList | null> = storageKeyStore('local', STORAGE_CACHE_PROFILE_LIST);
+export const profileListStore: Readable<ProfileList | null> = derived(
+    [unsortedProfileListStore, profileOrderStore],
+    ([profileList, profileOrder]) => {
+        if(profileList == null) {
+            return null;
+        } else {
+            if(profileOrder == null)
+                profileOrder = [];
+
+            const lookup = {};
+            profileOrder.forEach((id, idx) => {
+                lookup[id] = idx;
+            });
+            function profileIdx(id) {
+                return lookup[id] ?? profileOrder.length
+            }
+            return {
+                ...profileList,
+                profiles: [...profileList.profiles].sort(
+                    (a, b) => profileIdx(a.id) - profileIdx(b.id)
+                )
+            };
+        }
+    }
+);
 export const nativeConnectionStateStore: Readable<boolean> = storageKeyStore(
     'local',
     STORAGE_NATIVE_CONNECTION_STATE,
@@ -104,24 +134,22 @@ function lazyLoadPromise(img: HTMLImageElement, promise: Promise<string>): ILazy
 }
 
 export function loadAvatarIntoImageAction(img: HTMLImageElement, url: string | null) {
-    const src = imageSrcOrPromise(url)
-    let lazyLoad: ILazyLoadInstance | null = null;
-    if (typeof src === 'string') {
-        img.src = src;
-    } else {
-        lazyLoad = lazyLoadPromise(img, src);
+    function loadImage(url: string | null): ILazyLoadInstance | null {
+        const src = imageSrcOrPromise(url);
+        if (typeof src === 'string') {
+            img.src = src;
+            return null;
+        } else {
+            return lazyLoadPromise(img, src);
+        }
     }
+
+    let lazyLoad: ILazyLoadInstance | null = loadImage(url);
 
     return {
         update(url: string | null) {
             lazyLoad?.destroy();
-            const src = imageSrcOrPromise(url);
-            if (typeof src === 'string') {
-                lazyLoad = null;
-                img.src = src;
-            } else {
-                lazyLoad = lazyLoadPromise(img, src);
-            }
+            lazyLoad = loadImage(url);
         },
 
         destroy() {

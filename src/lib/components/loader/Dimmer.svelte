@@ -12,18 +12,23 @@
         justify-content: center;
         align-items: center;
     }
+    .dimmer-fixed {
+        position: fixed;
+    }
 </style>
 
 <script lang="ts">
     import Loader from "~/lib/components/loader/Loader.svelte";
 
     export let loading: boolean = false;
+    export let loadingText: string = "";
+    export let fixed: boolean = false;
 </script>
 
-<div class="dimmer">
+<div class="dimmer" class:dimmer-fixed={fixed}>
     {#if loading}
         <div class="loader">
-            <Loader/>
+            <Loader text={loadingText}/>
         </div>
     {/if}
 </div>

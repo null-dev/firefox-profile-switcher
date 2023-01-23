@@ -1,11 +1,12 @@
 import browser from "webextension-polyfill";
 import {
     EXTENSION_ID,
-    STORAGE_CACHE_PROFILE_LIST_KEY,
+    STORAGE_CACHE_PROFILE_LIST,
     STORAGE_NATIVE_CONNECTION_STATE,
     STORAGE_NATIVE_CONNECTOR_VERSION,
     STORAGE_NATIVE_INIT
 } from "~/lib/common";
+import type {Profile} from "~/lib/model/profiles";
 
 const REQUEST_TYPE_NATIVE = "nativeRequest";
 
@@ -64,18 +65,19 @@ async function initNativePort(eventCallback) {
         setTimeout(() => initNativePort(eventCallback), NATIVE_RECONNECT_INTERVAL);
     }
     nativePort.onDisconnect.addListener(onNativeDisconnect);
-    
+
     // Tell daemon to init
-    const profileList = await browser.storage.local.get(STORAGE_CACHE_PROFILE_LIST_KEY);
+    const profileList = await browser.storage.local.get(STORAGE_CACHE_PROFILE_LIST);
     let curProfileId = null;
     if(profileList != null) {
-        const profileListData = profileList[STORAGE_CACHE_PROFILE_LIST_KEY];
+        const profileListData = profileList[STORAGE_CACHE_PROFILE_LIST];
         if(profileListData != null) {
             curProfileId = profileListData.current_profile_id;
         }
     }
     nativeRequestInternal(nativePort, "Initialize", {
         extension_id: EXTENSION_ID,
+        extension_version: APP_VERSION,
         profile_id: curProfileId
     }).then(result => {
         console.debug("Native component initialization complete!", result);
@@ -103,6 +105,10 @@ export function initNative(eventCallback) {
 }
 
 async function nativeRequest(command, data, options?) {
+    if(window.failNativeRequests === true) {
+        throw new Error("window.failNativeRequests === true");
+    }
+
     if(nativePort != null) {
         return await nativeRequestInternal(nativePort, command, data, options);
     } else {
@@ -173,7 +179,7 @@ export async function nativeLaunchProfile(profileId, url?) {
     return await nativeRequest("LaunchProfile", {profile_id: profileId, url});
 }
 
-export async function nativeCreateProfile(profileName, profileAvatar, profileOptions?) {
+export async function nativeCreateProfile(profileName, profileAvatar, profileOptions?): Promise<{ profile: Profile }> {
     let options = profileOptions;
     if(options == null)
         options = {};
@@ -225,4 +231,8 @@ export async function nativeGetAvatar(id) {
 
 export async function nativeDeleteAvatar(id) {
     return await nativeRequest("DeleteAvatar", { avatar: id });
+}
+
+export async function nativeUpdateProfileOrder(order) {
+    return await nativeRequest("UpdateProfileOrder", { order });
 }

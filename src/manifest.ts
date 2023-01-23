@@ -43,6 +43,8 @@ const manifest = {
     "src/entries/manager/index.html",
     "src/entries/setup/index.html",
     "src/entries/update/index.html",
+
+    "src/entries/winfocus/index.html",
   ],
   // options_ui: {
   //   chrome_style: false,

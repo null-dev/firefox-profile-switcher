@@ -32,7 +32,7 @@
 <script lang="ts">
     import BottomBar from "../components/bottombar/BottomBar.svelte";
     import ProfileList from "../components/profilelist/ProfileList.svelte";
-    import {CURRENT_OPERATION, EDIT_MODE_CONTEXT} from "../components/manager";
+    import {CURRENT_OPERATION, EDIT_MODE_CONTEXT, NEW_PROFILE_EVENT} from "../components/manager";
     import {writable} from "svelte/store";
     import {setTypedContext} from "~/lib/typed-context";
 
@@ -41,12 +41,15 @@
 
     const currentPage = writable(null);
     setTypedContext(CURRENT_OPERATION, currentPage);
+
+    const newProfileEvent = writable(null);
+    setTypedContext(NEW_PROFILE_EVENT, newProfileEvent);
 </script>
 
 
 <div class="main-wrapper">
     <div class="profile-list-wrapper" class:editing={$editMode}>
-        <h1 class="profile-list-edit-header">Click a profile to edit it:</h1>
+        <h1 class="profile-list-edit-header">Hover over a profile for options:</h1>
         <ProfileList/>
     </div>
     <BottomBar />

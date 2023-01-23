@@ -30,19 +30,19 @@
         height: var(--loader-size);
     }
 
-    .loader.mini {
+    .mini {
         --loader-size: 1rem;
     }
-    .loader.tiny {
+    .tiny {
         --loader-size: 1.2rem;
     }
-    .loader.small {
+    .small {
         --loader-size: 1.5rem;
     }
-    .loader.medium {
+    .medium {
         --loader-size: 2rem;
     }
-    .loader.max {
+    .max {
         --loader-size: 100%;
     }
 
@@ -51,11 +51,33 @@
             transform: rotate(360deg);
         }
     }
+
+    .loader-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .loader-text {
+        padding-top: calc(var(--loader-size) / 5);
+        font-size: calc(var(--loader-size) / 2);
+        opacity: 0.7;
+        user-select: none;
+    }
 </style>
 
-<script>
-    export let size = "medium"
+<script lang="ts">
+    export let size: "mini" | "tiny" | "small" | "medium" | "max" = "medium";
+    export let text: string | null = null;
 </script>
 
-<span class="loader {size}">
-</span>
+
+{#if text != null && text !== ""}
+    <div class="loader-wrapper {size}">
+        <span class="loader">
+        </span>
+        <div class="loader-text">{text}</div>
+    </div>
+{:else}
+    <span class="loader {size}">
+    </span>
+{/if}

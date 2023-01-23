@@ -16,7 +16,8 @@
     import {ButtonType} from "~/lib/components/button/button";
     import Input from "~/lib/components/input/Input.svelte";
     import {getUniqueElementId} from "~/lib/utils";
-    import {CURRENT_OPERATION, EditOptionsOperation} from "../manager";
+    import {CURRENT_OPERATION} from "../manager";
+    import type {EditOptionsOperation} from "../manager";
     import type {GlobalOptions, ProfileOptions} from "~/lib/model/profiles";
     import {getTypedContext} from "~/lib/typed-context";
     import InputLabel from "~/lib/components/input/InputLabel.svelte";
@@ -33,16 +34,19 @@
     const darkModeInputId = getUniqueElementId();
     const globalDarkModeInputId = getUniqueElementId();
     const windowFocusWorkaroundInputId = getUniqueElementId();
+    const editModeAlwaysShowOptionsId = getUniqueElementId();
 
     let darkModeChecked = false;
     let darkModeAllChecked = false;
     let windowFocusWorkAroundChecked = false;
+    let editModeAlwaysShowOptionsChecked = false;
     deserializeSettings(operation.initialProfileOptions, operation.initialGlobalOptions)
 
     function deserializeSettings(profile: ProfileOptions, global: GlobalOptions) {
         darkModeChecked = global.darkMode ?? profile.darkMode;
         darkModeAllChecked = global.darkMode != null;
         windowFocusWorkAroundChecked = global.windowFocusWorkaround;
+        editModeAlwaysShowOptionsChecked = global.editModeAlwaysShowOptions;
     }
 
     let saving = false;
@@ -55,7 +59,8 @@
             };
             const globalOptions: GlobalOptions = {
                 darkMode: darkModeAllChecked ? darkModeChecked : null,
-                windowFocusWorkaround: windowFocusWorkAroundChecked
+                windowFocusWorkaround: windowFocusWorkAroundChecked,
+                editModeAlwaysShowOptions: editModeAlwaysShowOptionsChecked,
             };
 
             const profileList = $profileListStore?.profiles;
@@ -99,6 +104,12 @@
             <InputLabel forId={windowFocusWorkaroundInputId}>Window focus workaround:</InputLabel>
             <Input id={windowFocusWorkaroundInputId} type="checkbox" bind:checked={windowFocusWorkAroundChecked} />
             <p>Enable this if you aren't able to switch between open profiles.</p>
+        </div>
+        <div>
+            <!--suppress XmlInvalidId -->
+            <InputLabel forId={editModeAlwaysShowOptionsId}>Always show options in edit mode</InputLabel>
+            <Input id={editModeAlwaysShowOptionsId} type="checkbox" bind:checked={editModeAlwaysShowOptionsChecked} />
+            <p>Show options in edit mode even when not hovering over profiles. Useful on touchscreen devices.</p>
         </div>
     </div>
     <svelte:fragment slot="controls-right">

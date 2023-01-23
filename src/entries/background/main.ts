@@ -1,9 +1,10 @@
-import browser, {Action} from "webextension-polyfill";
+import browser from "webextension-polyfill";
+import type {Action} from "webextension-polyfill";
 import {initNative} from "~/lib/native";
 import {
   EXTENSION_ID,
   fetchAndRoundAvatarAsCanvas, REQUEST_TYPE_CLOSE_MANAGER, STORAGE_CACHE_CUSTOM_AVATARS, STORAGE_CACHE_GLOBAL_OPTIONS,
-  STORAGE_CACHE_PROFILE_LIST_KEY,
+  STORAGE_CACHE_PROFILE_LIST, STORAGE_CACHE_PROFILE_ORDER,
   STORAGE_NATIVE_CONNECTOR_VERSION
 } from "~/lib/common";
 
@@ -16,7 +17,7 @@ async function handleEvent(event) {
     // Sort profiles
     event.profiles.sort((a, b) => a.name.localeCompare(b.name));
 
-    browser.storage.local.set({[STORAGE_CACHE_PROFILE_LIST_KEY]: event});
+    browser.storage.local.set({[STORAGE_CACHE_PROFILE_LIST]: event});
 
     // Update browser action icon
     if(event.current_profile_id != null) {
@@ -51,6 +52,8 @@ async function handleEvent(event) {
     browser.storage.local.set({[STORAGE_CACHE_GLOBAL_OPTIONS]: event.options});
   } else if(event.event === "AvatarsUpdated") {
     browser.storage.local.set({[STORAGE_CACHE_CUSTOM_AVATARS]: event.avatars});
+  } else if(event.event === "ProfileOrderUpdated") {
+    browser.storage.local.set({[STORAGE_CACHE_PROFILE_ORDER]: event.order});
   }
 }
 
@@ -58,7 +61,7 @@ initNative(handleEvent);
 
 // Listen for when the winfocus page is launched and close it as fast as possible
 browser.tabs.onCreated.addListener(function(tab) {
-  if(tab.title === EXTENSION_ID + "/js/winfocus/winfocus.html") {
+  if(tab.title === EXTENSION_ID + "/src/entries/winfocus/index.html") {
     browser.tabs.remove(tab.id);
   }
 });

@@ -4,7 +4,7 @@
     import Button from "~/lib/components/button/Button.svelte";
     import {ButtonType} from "~/lib/components/button/button";
     import {getTypedContext} from "~/lib/typed-context";
-    import {CURRENT_OPERATION} from "../manager";
+    import {confirmAndDeleteProfile, CURRENT_OPERATION, NEW_PROFILE_EVENT} from "../manager";
     import {getUniqueElementId} from "~/lib/utils";
     import Input from "~/lib/components/input/Input.svelte";
     import PictureList from "./PictureList.svelte";
@@ -16,6 +16,8 @@
 
     const nameElementId = getUniqueElementId();
     const pictureElementId = getUniqueElementId();
+
+    const newProfileEvent = getTypedContext(NEW_PROFILE_EVENT);
 
     const currentOperation = getTypedContext(CURRENT_OPERATION);
     function endOperation() {
@@ -46,7 +48,8 @@
                 );
             } else {
                 // Add
-                await nativeCreateProfile(profileName, selectedAvatar);
+                let profile = (await nativeCreateProfile(profileName, selectedAvatar)).profile;
+                $newProfileEvent = profile.id;
             }
             endOperation();
         } catch(e) {
@@ -82,10 +85,9 @@
     async function deleteProfile() {
         deleting = true;
         try {
-            const confirmResult = confirm(`Are you sure you wish to delete the profile: ${operation.existingProfile.name}?`);
-            if(!confirmResult) return;
+            if(!await confirmAndDeleteProfile(operation.existingProfile))
+                return;
 
-            await nativeDeleteProfile(operation.existingProfile.id);
             endOperation();
         } catch(e) {
             console.error("Failed to delete profile!", e);

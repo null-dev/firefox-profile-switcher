@@ -31,7 +31,7 @@
 
 <script lang="ts">
     import {loadAvatarIntoImageAction, nativeConnectorVersionStore, RECOMMENDED_CONNECTOR_VERSION} from "~/lib/common";
-    import {Profile} from "~/lib/model/profiles";
+    import type {Profile} from "~/lib/model/profiles";
     import Button from "~/lib/components/button/Button.svelte";
     import {ButtonType} from "~/lib/components/button/button";
     import browser from "webextension-polyfill";

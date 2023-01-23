@@ -6,8 +6,10 @@
     import InstructionsChromeOS from "../components/instructions/InstructionsChromeOS.svelte";
     import InstructionsBSD from "../components/instructions/InstructionsBSD.svelte";
     import {setTypedContext} from "~/lib/typed-context";
-    import {SETUP_STATE_CONTEXT, SetupState} from "./state";
-    import {Writable, writable} from "svelte/store";
+    import {SETUP_STATE_CONTEXT} from "./state";
+    import type {SetupState} from "./state";
+    import {writable} from "svelte/store";
+    import type {Writable} from "svelte/store";
     import WindowHash from "~/lib/components/windowhash/WindowHash.svelte";
     import {onMount} from "svelte";
     import browser from "webextension-polyfill";
