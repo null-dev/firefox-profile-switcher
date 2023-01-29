@@ -40,18 +40,27 @@
     import {customAvatarsStore} from "~/lib/common";
     import AvatarPictureOption from "./AvatarPictureOption.svelte";
     import {nativeAddAvatars} from "~/lib/native";
+    import type {AvatarItem, ResAvatarListItem} from "./avatar";
+    import {AVATAR_PATH_PREFIX} from "./avatar";
 
     export let id;
     export let selectedAvatar: string | null = null;
 
-    const AVATAR_PATH_PREFIX = "/img/avatars";
-    function buildAvatarList(avatarList: string[], customAvatarList: string[]): string[] {
+    function buildAvatarList(avatarList: ResAvatarListItem[], customAvatarList: string[]): AvatarItem[] {
         let result = [];
         for(const customAvatarId of customAvatarList ?? []) {
-            result.push("custom:" + customAvatarId);
+            result.push({
+                path: "custom:" + customAvatarId,
+                name: "Custom avatar image",
+                nickname: null,
+            });
         }
-        for(const resAvatarPath of avatarList) {
-            result.push("res:" + AVATAR_PATH_PREFIX + "/" + resAvatarPath);
+        for(const resAvatar of avatarList) {
+            result.push({
+                path: "res:" + AVATAR_PATH_PREFIX + "/" + resAvatar.p,
+                name: resAvatar.n,
+                nickname: resAvatar.k,
+            });
         }
         return result;
     }
@@ -69,22 +78,23 @@
 
     // Use selected avatar or fallback to first non-custom avatar
     $: if(avatarList != null && selectedAvatar == null)
-        selectedAvatar = avatarList.find((a: string) => a.startsWith('res:'));
+        selectedAvatar = avatarList.find((a) => a.path.startsWith('res:')).path;
 </script>
 
 {#if avatarList != null}
-    <div {id} class="picture-list">
+    <div {id} class="picture-list" role="listbox">
         <div class="add-button"
-             on:click={addAvatar}>
+             on:click={addAvatar}
+             role="option">
             <div>
                 <img src={resolveAsset(addIcon)} alt="Add icon" aria-hidden="true" />
                 <div>Add picture</div>
             </div>
         </div>
-        {#each avatarList as avatar (avatar)}
-            <AvatarPictureOption src={avatar}
-                                 selected={avatar === selectedAvatar}
-                                 on:click={() => selectedAvatar = avatar} />
+        {#each avatarList as avatar (avatar.path)}
+            <AvatarPictureOption {avatar}
+                                 selected={avatar.path === selectedAvatar}
+                                 on:click={() => selectedAvatar = avatar.path} />
         {/each}
     </div>
 {/if}

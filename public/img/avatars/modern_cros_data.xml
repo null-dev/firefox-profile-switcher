@@ -1,0 +1,468 @@
+<!--
+Repository: https://chromium.googlesource.com/chromium/src.git
+Commit: 0f49704df9a3a31c2e99ac279c7873a17d5a11e3
+-->
+<root type="chrome">
+  <!--
+  Path: ui/chromeos/resources/ui_chromeos_resources.grd
+  -->
+  <mappings remove-prefix="default_user_images/" add-prefix="modern_cros_100/">
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER" file="default_user_images/avatar_anonymous.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_1" file="default_user_images/avatar_bee.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_2" file="default_user_images/avatar_briefcase.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_3" file="default_user_images/avatar_circles.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_4" file="default_user_images/avatar_cloud.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_5" file="default_user_images/avatar_cupcake.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_6" file="default_user_images/avatar_day.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_7" file="default_user_images/avatar_flower.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_8" file="default_user_images/avatar_globe.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_9" file="default_user_images/avatar_hotair.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_10" file="default_user_images/avatar_ladybug.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_11" file="default_user_images/avatar_leaf.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_12" file="default_user_images/avatar_night.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_13" file="default_user_images/avatar_plane.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_14" file="default_user_images/avatar_robot_body.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_15" file="default_user_images/avatar_robot_head.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_16" file="default_user_images/avatar_toolbox.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_17" file="default_user_images/avatar_user_color.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_18" file="default_user_images/avatar_user_enterprise.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_19" file="default_user_images/avatar_bicycle.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_20" file="default_user_images/avatar_bokeh.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_21" file="default_user_images/avatar_chess.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_22" file="default_user_images/avatar_coffee.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_23" file="default_user_images/avatar_dragonfly.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_24" file="default_user_images/avatar_frog.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_25" file="default_user_images/avatar_ganzania.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_26" file="default_user_images/avatar_jackrussellterrier.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_27" file="default_user_images/avatar_jellyfish.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_28" file="default_user_images/avatar_kiwi.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_29" file="default_user_images/avatar_penguin.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_30" file="default_user_images/avatar_rainbowfish.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_31" file="default_user_images/avatar_recordplayer.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_32" file="default_user_images/avatar_upsidedown.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_33" file="default_user_images/avatar_cat.png" />
+  </mappings>
+  <!--
+  Path: ui/chromeos/resources/ui_chromeos_resources.grd
+  -->
+  <mappings remove-prefix="default_user_images/" add-prefix="modern_cros_200/">
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_34" file="default_user_images/origami/avatar_penguin.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_35" file="default_user_images/origami/avatar_fox.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_36" file="default_user_images/origami/avatar_snail.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_37" file="default_user_images/origami/avatar_redbutterfly.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_38" file="default_user_images/origami/avatar_cat.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_39" file="default_user_images/origami/avatar_corgi.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_40" file="default_user_images/origami/avatar_rabbit.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_41" file="default_user_images/origami/avatar_pinkbutterfly.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_42" file="default_user_images/origami/avatar_monkey.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_43" file="default_user_images/origami/avatar_dragon.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_44" file="default_user_images/origami/avatar_elephant.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_45" file="default_user_images/origami/avatar_panda.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_46" file="default_user_images/origami/avatar_unicorn.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_47" file="default_user_images/origami/avatar_butterflies.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_48" file="default_user_images/illustration/avatar_bird.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_49" file="default_user_images/illustration/avatar_ramen.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_50" file="default_user_images/illustration/avatar_tamagotchi.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_51" file="default_user_images/illustration/avatar_cheese.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_52" file="default_user_images/illustration/avatar_football.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_53" file="default_user_images/illustration/avatar_basketball.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_54" file="default_user_images/illustration/avatar_vinyl.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_55" file="default_user_images/illustration/avatar_sushi.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_56" file="default_user_images/illustration/avatar_bike.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_57" file="default_user_images/illustration/avatar_sunglasses.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_58" file="default_user_images/abstract/avatar_pizza.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_59" file="default_user_images/abstract/avatar_sandwich.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_60" file="default_user_images/abstract/avatar_cappuccino.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_61" file="default_user_images/abstract/avatar_icewater.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_62" file="default_user_images/abstract/avatar_icecream.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_63" file="default_user_images/abstract/avatar_onigiri.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_64" file="default_user_images/abstract/avatar_melon.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_65" file="default_user_images/abstract/avatar_avocado.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_66" file="default_user_images/geo/avatar_geo1.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_67" file="default_user_images/geo/avatar_geo2.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_68" file="default_user_images/geo/avatar_geo3.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_69" file="default_user_images/geo/avatar_geo4.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_70" file="default_user_images/geo/avatar_geo5.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_71" file="default_user_images/imaginary/avatar_botanist.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_72" file="default_user_images/imaginary/avatar_burger.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_73" file="default_user_images/imaginary/avatar_graduate.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_74" file="default_user_images/imaginary/avatar_guitar.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_75" file="default_user_images/imaginary/avatar_waving.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_76" file="default_user_images/imaginary/avatar_lion.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_77" file="default_user_images/imaginary/avatar_planet.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_78" file="default_user_images/imaginary/avatar_instant_camera.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_79" file="default_user_images/imaginary/avatar_robot.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_80" file="default_user_images/imaginary/avatar_sneaker.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_81" file="default_user_images/imaginary/avatar_van.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_82" file="default_user_images/imaginary/avatar_watermelon.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_83" file="default_user_images/material_design/avatar_person_watering_plants.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_84" file="default_user_images/material_design/avatar_person_daydreaming.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_85" file="default_user_images/material_design/avatar_person_with_flowers.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_86" file="default_user_images/material_design/avatar_person_with_cats.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_87" file="default_user_images/material_design/avatar_artist.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_88" file="default_user_images/material_design/avatar_person_doing_taichi.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_89" file="default_user_images/material_design/avatar_signing_thankyou.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_90" file="default_user_images/material_design/avatar_person_with_coffee.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_91" file="default_user_images/material_design/avatar_dog_wagging_tail.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_92" file="default_user_images/material_design/avatar_nurse.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_93" file="default_user_images/material_design/avatar_gamer.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_94" file="default_user_images/material_design/avatar_bookworm.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_95" file="default_user_images/material_design/avatar_biking.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_96" file="default_user_images/material_design/avatar_person_in_snow.png" />
+    <structure type="chrome_scaled_image" name="IDR_LOGIN_DEFAULT_USER_97" file="default_user_images/material_design/avatar_person_with_megaphone.png" />
+  </mappings>
+  <!--
+  There were no translations for some avatar images in the chromium code base so I wrote my own:
+  -->
+  <avatar-to-translation><![CDATA[
+{
+  "IDR_LOGIN_DEFAULT_USER": "Default user avatar",
+  "IDR_LOGIN_DEFAULT_USER_1": "Bee",
+  "IDR_LOGIN_DEFAULT_USER_2": "Briefcase",
+  "IDR_LOGIN_DEFAULT_USER_3": "Circles",
+  "IDR_LOGIN_DEFAULT_USER_4": "Cloud",
+  "IDR_LOGIN_DEFAULT_USER_5": "Cupcake",
+  "IDR_LOGIN_DEFAULT_USER_6": "Day",
+  "IDR_LOGIN_DEFAULT_USER_7": "Flower",
+  "IDR_LOGIN_DEFAULT_USER_8": "Globe",
+  "IDR_LOGIN_DEFAULT_USER_9": "Hot air balloon",
+  "IDR_LOGIN_DEFAULT_USER_10": "Ladybug",
+  "IDR_LOGIN_DEFAULT_USER_11": "Leaf",
+  "IDR_LOGIN_DEFAULT_USER_12": "Night",
+  "IDR_LOGIN_DEFAULT_USER_13": "Plane",
+  "IDR_LOGIN_DEFAULT_USER_14": "Robot",
+  "IDR_LOGIN_DEFAULT_USER_15": "Robot head",
+  "IDR_LOGIN_DEFAULT_USER_16": "Toolbox",
+  "IDR_LOGIN_DEFAULT_USER_17": "Colorful user avatar",
+  "IDR_LOGIN_DEFAULT_USER_18": "Enterprise user avatar"
+}
+  ]]></avatar-to-translation>
+  <!--
+  Path: chrome/browser/ash/login/users/default_user_image/default_user_images.cc
+  -->
+  <avatar-to-label regex="\{\s*(\w+)\s*,\s*(\w+)\s*,\s*Eligibility::\w+\s*,\s*&quot;[^&quot;]*&quot;\s*}\s*,">
+    {IDR_LOGIN_DEFAULT_USER_19, IDS_LOGIN_DEFAULT_USER_DESC_19, Eligibility::kDeprecated, "legacy/avatar_bicycle.png"},
+    {IDR_LOGIN_DEFAULT_USER_20, IDS_LOGIN_DEFAULT_USER_DESC_20, Eligibility::kDeprecated, "legacy/avatar_bokeh.png"},
+    {IDR_LOGIN_DEFAULT_USER_21, IDS_LOGIN_DEFAULT_USER_DESC_21, Eligibility::kDeprecated, "legacy/avatar_chess.png"},
+    {IDR_LOGIN_DEFAULT_USER_22, IDS_LOGIN_DEFAULT_USER_DESC_22, Eligibility::kDeprecated, "legacy/avatar_coffee.png"},
+    {IDR_LOGIN_DEFAULT_USER_23, IDS_LOGIN_DEFAULT_USER_DESC_23, Eligibility::kDeprecated, "legacy/avatar_dragonfly.png"},
+    {IDR_LOGIN_DEFAULT_USER_24, IDS_LOGIN_DEFAULT_USER_DESC_24, Eligibility::kDeprecated, "legacy/avatar_frog.png"},
+    {IDR_LOGIN_DEFAULT_USER_25, IDS_LOGIN_DEFAULT_USER_DESC_25, Eligibility::kDeprecated, "legacy/avatar_ganzania.png"},
+    {IDR_LOGIN_DEFAULT_USER_26, IDS_LOGIN_DEFAULT_USER_DESC_26, Eligibility::kDeprecated, "legacy/avatar_jackrussellterrier.png"},
+    {IDR_LOGIN_DEFAULT_USER_27, IDS_LOGIN_DEFAULT_USER_DESC_27, Eligibility::kDeprecated, "legacy/avatar_jellyfish.png"},
+    {IDR_LOGIN_DEFAULT_USER_28, IDS_LOGIN_DEFAULT_USER_DESC_28, Eligibility::kDeprecated, "legacy/avatar_kiwi.png"},
+    {IDR_LOGIN_DEFAULT_USER_29, IDS_LOGIN_DEFAULT_USER_DESC_29, Eligibility::kDeprecated, "legacy/avatar_penguin.png"},
+    {IDR_LOGIN_DEFAULT_USER_30, IDS_LOGIN_DEFAULT_USER_DESC_30, Eligibility::kDeprecated, "legacy/avatar_rainbowfish.png"},
+    {IDR_LOGIN_DEFAULT_USER_31, IDS_LOGIN_DEFAULT_USER_DESC_31, Eligibility::kDeprecated, "legacy/avatar_recordplayer.png"},
+    {IDR_LOGIN_DEFAULT_USER_32, IDS_LOGIN_DEFAULT_USER_DESC_32, Eligibility::kDeprecated, "legacy/avatar_upsidedown.png"},
+    {IDR_LOGIN_DEFAULT_USER_33, IDS_LOGIN_DEFAULT_USER_DESC_33, Eligibility::kDeprecated, "legacy/avatar_cat.png"},
+
+    {IDR_LOGIN_DEFAULT_USER_34, IDS_LOGIN_DEFAULT_USER_DESC_34, Eligibility::kDeprecated, "origami/avatar_penguin.png"},
+    {IDR_LOGIN_DEFAULT_USER_35, IDS_LOGIN_DEFAULT_USER_DESC_35, Eligibility::kDeprecated, "origami/avatar_fox.png"},
+    {IDR_LOGIN_DEFAULT_USER_36, IDS_LOGIN_DEFAULT_USER_DESC_36, Eligibility::kDeprecated, "origami/avatar_snail.png"},
+    {IDR_LOGIN_DEFAULT_USER_37, IDS_LOGIN_DEFAULT_USER_DESC_37, Eligibility::kDeprecated, "origami/avatar_redbutterfly.png"},
+    {IDR_LOGIN_DEFAULT_USER_38, IDS_LOGIN_DEFAULT_USER_DESC_38, Eligibility::kDeprecated, "origami/avatar_cat.png"},
+    {IDR_LOGIN_DEFAULT_USER_39, IDS_LOGIN_DEFAULT_USER_DESC_39, Eligibility::kDeprecated, "origami/avatar_corgi.png"},
+    {IDR_LOGIN_DEFAULT_USER_40, IDS_LOGIN_DEFAULT_USER_DESC_40, Eligibility::kDeprecated, "origami/avatar_rabbit.png"},
+    {IDR_LOGIN_DEFAULT_USER_41, IDS_LOGIN_DEFAULT_USER_DESC_41, Eligibility::kDeprecated, "origami/avatar_pinkbutterfly.png"},
+    {IDR_LOGIN_DEFAULT_USER_42, IDS_LOGIN_DEFAULT_USER_DESC_42, Eligibility::kDeprecated, "origami/avatar_monkey.png"},
+    {IDR_LOGIN_DEFAULT_USER_43, IDS_LOGIN_DEFAULT_USER_DESC_43, Eligibility::kDeprecated, "origami/avatar_dragon.png"},
+    {IDR_LOGIN_DEFAULT_USER_44, IDS_LOGIN_DEFAULT_USER_DESC_44, Eligibility::kDeprecated, "origami/avatar_elephant.png"},
+    {IDR_LOGIN_DEFAULT_USER_45, IDS_LOGIN_DEFAULT_USER_DESC_45, Eligibility::kDeprecated, "origami/avatar_panda.png"},
+    {IDR_LOGIN_DEFAULT_USER_46, IDS_LOGIN_DEFAULT_USER_DESC_46, Eligibility::kDeprecated, "origami/avatar_unicorn.png"},
+    {IDR_LOGIN_DEFAULT_USER_47, IDS_LOGIN_DEFAULT_USER_DESC_47, Eligibility::kDeprecated, "origami/avatar_butterflies.png"},
+    {IDR_LOGIN_DEFAULT_USER_48, IDS_LOGIN_DEFAULT_USER_DESC_48, Eligibility::kEligible,   "illustration/avatar_bird.png"},
+    {IDR_LOGIN_DEFAULT_USER_49, IDS_LOGIN_DEFAULT_USER_DESC_49, Eligibility::kEligible,   "illustration/avatar_ramen.png"},
+    {IDR_LOGIN_DEFAULT_USER_50, IDS_LOGIN_DEFAULT_USER_DESC_50, Eligibility::kEligible,   "illustration/avatar_tamagotchi.png"},
+    {IDR_LOGIN_DEFAULT_USER_51, IDS_LOGIN_DEFAULT_USER_DESC_51, Eligibility::kEligible,   "illustration/avatar_cheese.png"},
+    {IDR_LOGIN_DEFAULT_USER_52, IDS_LOGIN_DEFAULT_USER_DESC_52, Eligibility::kEligible,   "illustration/avatar_football.png"},
+    {IDR_LOGIN_DEFAULT_USER_53, IDS_LOGIN_DEFAULT_USER_DESC_53, Eligibility::kEligible,   "illustration/avatar_basketball.png"},
+    {IDR_LOGIN_DEFAULT_USER_54, IDS_LOGIN_DEFAULT_USER_DESC_54, Eligibility::kEligible,   "illustration/avatar_vinyl.png"},
+    {IDR_LOGIN_DEFAULT_USER_55, IDS_LOGIN_DEFAULT_USER_DESC_55, Eligibility::kEligible,   "illustration/avatar_sushi.png"},
+    {IDR_LOGIN_DEFAULT_USER_56, IDS_LOGIN_DEFAULT_USER_DESC_56, Eligibility::kEligible,   "illustration/avatar_bike.png"},
+    {IDR_LOGIN_DEFAULT_USER_57, IDS_LOGIN_DEFAULT_USER_DESC_57, Eligibility::kEligible,   "illustration/avatar_sunglasses.png"},
+    {IDR_LOGIN_DEFAULT_USER_58, IDS_LOGIN_DEFAULT_USER_DESC_58, Eligibility::kEligible,   "abstract/avatar_pizza.png"},
+    {IDR_LOGIN_DEFAULT_USER_59, IDS_LOGIN_DEFAULT_USER_DESC_59, Eligibility::kEligible,   "abstract/avatar_sandwich.png"},
+    {IDR_LOGIN_DEFAULT_USER_60, IDS_LOGIN_DEFAULT_USER_DESC_60, Eligibility::kEligible,   "abstract/avatar_cappuccino.png"},
+    {IDR_LOGIN_DEFAULT_USER_61, IDS_LOGIN_DEFAULT_USER_DESC_61, Eligibility::kEligible,   "abstract/avatar_icewater.png"},
+    {IDR_LOGIN_DEFAULT_USER_62, IDS_LOGIN_DEFAULT_USER_DESC_62, Eligibility::kEligible,   "abstract/avatar_icecream.png"},
+    {IDR_LOGIN_DEFAULT_USER_63, IDS_LOGIN_DEFAULT_USER_DESC_63, Eligibility::kEligible,   "abstract/avatar_onigiri.png"},
+    {IDR_LOGIN_DEFAULT_USER_64, IDS_LOGIN_DEFAULT_USER_DESC_64, Eligibility::kEligible,   "abstract/avatar_melon.png"},
+    {IDR_LOGIN_DEFAULT_USER_65, IDS_LOGIN_DEFAULT_USER_DESC_65, Eligibility::kEligible,   "abstract/avatar_avocado.png"},
+    {IDR_LOGIN_DEFAULT_USER_66, IDS_LOGIN_DEFAULT_USER_DESC_66, Eligibility::kDeprecated, "geo/avatar_geo1.png"},
+    {IDR_LOGIN_DEFAULT_USER_67, IDS_LOGIN_DEFAULT_USER_DESC_67, Eligibility::kDeprecated, "geo/avatar_geo2.png"},
+    {IDR_LOGIN_DEFAULT_USER_68, IDS_LOGIN_DEFAULT_USER_DESC_68, Eligibility::kDeprecated, "geo/avatar_geo3.png"},
+    {IDR_LOGIN_DEFAULT_USER_69, IDS_LOGIN_DEFAULT_USER_DESC_69, Eligibility::kDeprecated, "geo/avatar_geo4.png"},
+    {IDR_LOGIN_DEFAULT_USER_70, IDS_LOGIN_DEFAULT_USER_DESC_70, Eligibility::kDeprecated, "geo/avatar_geo5.png"},
+    {IDR_LOGIN_DEFAULT_USER_71, IDS_LOGIN_DEFAULT_USER_DESC_71, Eligibility::kEligible,   "imaginary/avatar_botanist.png"},
+    {IDR_LOGIN_DEFAULT_USER_72, IDS_LOGIN_DEFAULT_USER_DESC_72, Eligibility::kEligible,   "imaginary/avatar_burger.png"},
+    {IDR_LOGIN_DEFAULT_USER_73, IDS_LOGIN_DEFAULT_USER_DESC_73, Eligibility::kEligible,   "imaginary/avatar_graduate.png"},
+    {IDR_LOGIN_DEFAULT_USER_74, IDS_LOGIN_DEFAULT_USER_DESC_74, Eligibility::kEligible,   "imaginary/avatar_guitar.png"},
+    {IDR_LOGIN_DEFAULT_USER_75, IDS_LOGIN_DEFAULT_USER_DESC_75, Eligibility::kEligible,   "imaginary/avatar_waving.png"},
+    {IDR_LOGIN_DEFAULT_USER_76, IDS_LOGIN_DEFAULT_USER_DESC_76, Eligibility::kEligible,   "imaginary/avatar_lion.png"},
+    {IDR_LOGIN_DEFAULT_USER_77, IDS_LOGIN_DEFAULT_USER_DESC_77, Eligibility::kEligible,   "imaginary/avatar_planet.png"},
+    {IDR_LOGIN_DEFAULT_USER_78, IDS_LOGIN_DEFAULT_USER_DESC_78, Eligibility::kEligible,   "imaginary/avatar_instant_camera.png"},
+    {IDR_LOGIN_DEFAULT_USER_79, IDS_LOGIN_DEFAULT_USER_DESC_79, Eligibility::kEligible,   "imaginary/avatar_robot.png"},
+    {IDR_LOGIN_DEFAULT_USER_80, IDS_LOGIN_DEFAULT_USER_DESC_80, Eligibility::kEligible,   "imaginary/avatar_sneaker.png"},
+    {IDR_LOGIN_DEFAULT_USER_81, IDS_LOGIN_DEFAULT_USER_DESC_81, Eligibility::kEligible,   "imaginary/avatar_van.png"},
+    {IDR_LOGIN_DEFAULT_USER_82, IDS_LOGIN_DEFAULT_USER_DESC_82, Eligibility::kEligible,   "imaginary/avatar_watermelon.png"},
+
+    {IDR_LOGIN_DEFAULT_USER_83, IDS_LOGIN_DEFAULT_USER_DESC_83, Eligibility::kEligible, "material_design/avatar_person_watering_plants.png"},
+    {IDR_LOGIN_DEFAULT_USER_84, IDS_LOGIN_DEFAULT_USER_DESC_84, Eligibility::kEligible, "material_design/avatar_person_daydreaming.png"},
+    {IDR_LOGIN_DEFAULT_USER_85, IDS_LOGIN_DEFAULT_USER_DESC_85, Eligibility::kEligible, "material_design/avatar_person_with_flowers.png"},
+    {IDR_LOGIN_DEFAULT_USER_86, IDS_LOGIN_DEFAULT_USER_DESC_86, Eligibility::kEligible, "material_design/avatar_person_with_cats.png"},
+    {IDR_LOGIN_DEFAULT_USER_87, IDS_LOGIN_DEFAULT_USER_DESC_87, Eligibility::kEligible, "material_design/avatar_artist.png"},
+    {IDR_LOGIN_DEFAULT_USER_88, IDS_LOGIN_DEFAULT_USER_DESC_88, Eligibility::kEligible, "material_design/avatar_person_doing_taichi.png"},
+    {IDR_LOGIN_DEFAULT_USER_89, IDS_LOGIN_DEFAULT_USER_DESC_89, Eligibility::kEligible, "material_design/avatar_signing_thankyou.png"},
+    {IDR_LOGIN_DEFAULT_USER_90, IDS_LOGIN_DEFAULT_USER_DESC_90, Eligibility::kEligible, "material_design/avatar_person_with_coffee.png"},
+    {IDR_LOGIN_DEFAULT_USER_91, IDS_LOGIN_DEFAULT_USER_DESC_91, Eligibility::kEligible, "material_design/avatar_dog_wagging_tail.png"},
+    {IDR_LOGIN_DEFAULT_USER_92, IDS_LOGIN_DEFAULT_USER_DESC_92, Eligibility::kEligible, "material_design/avatar_nurse.png"},
+    {IDR_LOGIN_DEFAULT_USER_93, IDS_LOGIN_DEFAULT_USER_DESC_93, Eligibility::kEligible, "material_design/avatar_gamer.png"},
+    {IDR_LOGIN_DEFAULT_USER_94, IDS_LOGIN_DEFAULT_USER_DESC_94, Eligibility::kEligible, "material_design/avatar_bookworm.png"},
+    {IDR_LOGIN_DEFAULT_USER_95, IDS_LOGIN_DEFAULT_USER_DESC_95, Eligibility::kEligible, "material_design/avatar_biking.png"},
+    {IDR_LOGIN_DEFAULT_USER_96, IDS_LOGIN_DEFAULT_USER_DESC_96, Eligibility::kEligible, "material_design/avatar_person_in_snow.png"},
+    {IDR_LOGIN_DEFAULT_USER_97, IDS_LOGIN_DEFAULT_USER_DESC_97, Eligibility::kEligible, "material_design/avatar_person_with_megaphone.png"},
+  </avatar-to-label>
+  <!--
+  Path: ui/chromeos/ui_chromeos_strings.grd
+  -->
+  <translations>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_19" desc="Description of the default user icon with a picture of a bicycle">
+      Bicycle
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_20" desc="Description of the default user icon with a picture of a Bokeh (an out-of focus effect in photography)">
+      Bokeh
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_21" desc="Description of the default user icon with a picture of a game of chess">
+      Chess
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_22" desc="Description of the default user icon with a picture of a cup of coffee">
+      Coffee
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_23" desc="Description of the default user icon with a picture of a dragonfly">
+      Dragonfly
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_24" desc="Description of the default user icon with a picture of a frog">
+      Frog
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_25" desc="Description of the default user icon with a picture of a Gazania (a kind of flower - okay to translate as just flower or some similar flower name)">
+      Gazania Flower
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_26" desc="Description of the default user icon with a picture of a Jack Russell Terrier (a kind of dog - okay to translate as just dog)">
+      Jack Russell Terrier
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_27" desc="Description of the default user icon with a picture of a jellyfish">
+      Jellyfish
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_28" desc="Description of the default user icon with a picture of a kiwi (fruit)">
+      Kiwi
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_29" desc="Description of the default user icon with a picture of a penguin">
+      Penguin
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_30" desc="Description of the default user icon with a picture of a rainbowfish (a kind of fish)">
+      Rainbowfish
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_31" desc="Description of the default user icon with a picture of a record player (phonograph)">
+      Record player
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_32" desc="Description of the default user icon with a picture of a butterfly upside-down on a flower; the name of the photo is Upside-Down.">
+      Upside Down
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_33" desc="Description of the default user icon with a picture of a cat">
+      Cat
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_34" desc="Description of the default user icon with a picture of a penguin">
+      Penguin
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_35" desc="Description of the default user icon with a picture of a fox">
+      Fox
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_36" desc="Description of the default user icon with a picture of a snail">
+      Snail
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_37" desc="Description of the default user icon with a picture of a red butterfly">
+      Red butterfly
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_38" desc="Description of the default user icon with a picture of a cat">
+      Cat
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_39" desc="Description of the default user icon with a picture of a corgi">
+      Corgi
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_40" desc="Description of the default user icon with a picture of a rabbit">
+      Rabbit
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_41" desc="Description of the default user icon with a picture of a pink butterfly">
+      Pink butterfly
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_42" desc="Description of the default user icon with a picture of a monkey">
+      Monkey
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_43" desc="Description of the default user icon with a picture of a dragon">
+      Dragon
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_44" desc="Description of the default user icon with a picture of a elephant">
+      Elephant
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_45" desc="Description of the default user icon with a picture of a panda">
+      Panda
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_46" desc="Description of the default user icon with a picture of a unicorn">
+      Unicorn
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_47" desc="Description of the default user icon with a picture of butterflies">
+      Butterflies
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_48" desc="Description of the default user icon with a picture of a bird">
+      Bird
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_49" desc="Description of the default user icon with a picture of ramen">
+      Ramen
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_50" desc="Description of the default user icon with a picture of a tamagotchi">
+      Tamagotchi
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_51" desc="Description of the default user icon with a picture of a cheese">
+      Cheese
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_52" desc="Description of the default user icon with a picture of a football">
+      Football
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_53" desc="Description of the default user icon with a picture of a basketball">
+      Basketball
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_54" desc="Description of the default user icon with a picture of a vinyl record">
+      Vinyl record
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_55" desc="Description of the default user icon with a picture of sushi">
+      Sushi
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_56" desc="Description of the default user icon with a picture of a bike">
+      Bike
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_57" desc="Description of the default user icon with a picture of a pair of sunglasses">
+      Sunglasses
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_58" desc="Description of the default user icon with a picture of a pizza">
+      Pizza
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_59" desc="Description of the default user icon with a picture of a sandwich">
+      Sandwich
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_60" desc="Description of the default user icon with a picture of a cappuccino">
+      Cappuccino
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_61" desc="Description of the default user icon with a picture of an ice water">
+      Ice water
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_62" desc="Description of the default user icon with a picture of an ice cream">
+      Ice cream
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_63" desc="Description of the default user icon with a picture of onigiri">
+      Onigiri
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_64" desc="Description of the default user icon with a picture of a melon">
+      Melon
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_65" desc="Description of the default user icon with a picture of an avocado">
+      Avocado
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_66" desc="Description of the default user icon that is an abstract representation of an airstrip landing">
+      Landing
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_67" desc="Description of the default user icon that is an abstract representation of a lunar landscape. Moonscape is another possible translation.">
+      Lunar
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_68" desc="Description of the default user icon with an abstract geometric figure containing dots">
+      Dots
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_69" desc="Description of the default user icon with an abstract picture of a geometric figure containing concentric circles, named 'Spin'">
+      Spin
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_70" desc="Description of the default user icon with a picture of geometric figure containing 'Grids'">
+      Grids
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_71" desc="Tooltip shown when the 'botanist' avatar is hovered in the 'Choose device account image' section of the settings page. A botanist is an expert or student of the scientific study of plants.">
+      Botanist
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_72" desc="Tooltip shown when the 'burger' avatar is hovered in the 'Choose device account image' section of the settings page. A burger is a dish consisting of a round patty of ground beef, or sometimes another savory ingredient, that is fried or grilled and typically served in a split bun or roll with various condiments and toppings">
+      Burger
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_73" desc="Tooltip shown when the 'graduate' avatar is hovered in the 'Choose device account image' section of the settings page. 'Graduate' means a person has successfully completed a course of study or training, especially when the person has been awarded an undergraduate academic degree.">
+      Graduate
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_74" desc="Tooltip shown when the 'guitar' avatar is hovered in the 'Choose device account image' section of the settings page. A guitar is a stringed musical instrument, with a fretted fingerboard, typically incurved sides, and six or twelve strings, played by plucking or strumming with the fingers or a plectrum.">
+      Guitar
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_75" desc="Tooltip shown when the 'waving' avatar is hovered in the 'Choose device account image' section of the settings page. Waving means moving one's hand to and fro in greeting or as a signal">
+      Waving
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_76" desc="Tooltip shown when the 'lion' avatar is hovered in the 'Choose device account image' section of the settings page. A lion is a large tawny-colored cat that lives in prides, found in Africa and northwestern India. The male has a flowing shaggy mane and takes little part in hunting, which is done cooperatively by the females.">
+      Lion
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_77" desc="Tooltip shown when the 'planet' avatar is hovered in the 'Choose device account image' section of the settings page. A planet is a celestial body moving in an elliptical orbit around a star.">
+      Planet
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_78" desc="Tooltip shown when the 'instant camera' avatar is hovered in the 'Choose device account image' section of the settings page. An instant camera is a type of camera with internal processing which produces a finished print rapidly after each exposure.">
+      Instant Camera
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_79" desc="Tooltip shown when the 'robot' avatar is hovered in the 'Choose device account image' section of the settings page. A robot is a machine resembling a human being and able to replicate certain human movements and functions automatically">
+      Robot
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_80" desc="Tooltip shown when the 'sneaker' avatar is hovered in the 'Choose device account image' section of the settings page. A sneaker is a soft shoe with a rubber sole worn for sports or casual occasions.">
+      Sneaker
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_81" desc="Tooltip shown when the 'van' avatar is hovered in the 'Choose device account image' section of the settings page. A van is a medium-sized motor vehicle with a boxy shape and high roof, used for transporting goods or passengers">
+      Van
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_82" desc="Tooltip shown when the 'watermelon' avatar is hovered in the 'Choose device account image' section of the settings page. A watermelon is a large fruit of a plant of the gourd family, with smooth green skin, red pulp, and watery juice. Popular fruit in summer.">
+      Watermelon
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_83" desc="Description of the default user icon with a picture of a person watering plants">
+      Person watering plants
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_84" desc="Description of the default user icon with a picture of a person daydreaming">
+      Person daydreaming
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_85" desc="Description of the default user icon with a picture of a person with flowers">
+      Person with flowers
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_86" desc="Description of the default user icon with a picture of a person with cats">
+      Person with cats
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_87" desc="Description of the default user icon with a picture of an artist">
+      Artist
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_88" desc="Description of the default user icon with a picture of a person doing tai chi">
+      Person doing tai chi
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_89" desc="Description of the default user icon with a picture of a person signing thank you">
+      Signing thank you
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_90" desc="Description of the default user icon with a picture of a person with coffee">
+      Person with coffee
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_91" desc="Description of the default user icon with a picture of a dog wagging tail">
+      Dog wagging tail
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_92" desc="Description of the default user icon with a picture of a nurse">
+      Nurse
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_93" desc="Description of the default user icon with a picture of a gamer">
+      Gamer
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_94" desc="Description of the default user icon with a picture of a bookworm">
+      Bookworm
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_95" desc="Description of the default user icon with a picture of a person biking">
+      Biking
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_96" desc="Description of the default user icon with a picture of a person in snow">
+      Person in snow
+    </message>
+    <message name="IDS_LOGIN_DEFAULT_USER_DESC_97" desc="Description of the default user icon with a picture of a person with megaphone">
+      Person with megaphone
+    </message>
+  </translations>
+</root>

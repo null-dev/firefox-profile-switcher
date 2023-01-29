@@ -47,25 +47,28 @@
     }
 </style>
 
-<script>
+<script lang="ts">
     import {loadAvatarIntoImageAction, profileListStore} from "~/lib/common";
     import {scale} from "svelte/transition";
     import deleteIcon from "~/assets/delete-white.svg";
     import {resolveAsset} from "~/lib/utils";
     import Loader from "~/lib/components/loader/Loader.svelte";
     import {nativeDeleteAvatar} from "~/lib/native";
+    import type {AvatarItem} from "./avatar";
 
     export let selected = false;
-    export let src = null;
+    export let avatar = null;
 
     let deleting = false;
 
     async function deleteAvatar() {
+        if(avatar == null) return;
+
         deleting = true;
         try {
             // Check if the avatar is in use
             // We do this on the client side since we are treating the connector as essentially a dumb filestore
-            const inUseProfile = $profileListStore?.profiles.find(it => it.avatar === src);
+            const inUseProfile = $profileListStore?.profiles.find(it => it.avatar === avatar.path);
             if(inUseProfile != null) {
                 alert(`You can't delete this avatar because it is in use by a profile: ${inUseProfile.name}`);
                 return;
@@ -74,7 +77,7 @@
             const confirmResult = confirm(`Are you sure you want to delete this avatar image?`);
             if(!confirmResult) return;
 
-            const id = new URL(src).pathname;
+            const id = new URL(avatar.path).pathname;
             await nativeDeleteAvatar(id);
         } catch(e) {
             console.error("Failed to delete avatar image!", e);
@@ -83,16 +86,27 @@
             deleting = false;
         }
     }
+
+    function avatarDisplayName(avatar: AvatarItem): string {
+        let name = avatar.name;
+        if(avatar.nickname != null) {
+            name += ` (aka ${avatar.nickname})`
+        }
+        return name;
+    }
+
+    $: displayName = avatar != null ? avatarDisplayName(avatar) : null
 </script>
 
-<div class:selected>
+<div class:selected role="option" aria-selected={selected}>
     <img class="avatar"
          class:selected
-         alt="Avatar"
+         alt={displayName}
+         title={displayName}
          draggable="false"
-         use:loadAvatarIntoImageAction={src}
+         use:loadAvatarIntoImageAction={avatar?.path}
          on:click transition:scale|local />
-    {#if src.startsWith('custom:')}
+    {#if avatar.path.startsWith('custom:')}
         {#if deleting}
             <div class="delete-button">
                 <Loader size="tiny" />

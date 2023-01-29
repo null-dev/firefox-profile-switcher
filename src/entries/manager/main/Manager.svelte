@@ -34,7 +34,7 @@
     import ProfileList from "../components/profilelist/ProfileList.svelte";
     import {CURRENT_OPERATION, EDIT_MODE_CONTEXT, NEW_PROFILE_EVENT} from "../components/manager";
     import {writable} from "svelte/store";
-    import {setTypedContext} from "~/lib/typed-context";
+    import {getTypedContext, setTypedContext} from "~/lib/typed-context";
 
     const editMode = writable(false);
     setTypedContext(EDIT_MODE_CONTEXT, editMode);
@@ -50,7 +50,7 @@
 
 
 <div class="main-wrapper">
-    <div class="profile-list-wrapper" class:editing={$editMode} bind:this={profileListWrapperElement}>
+    <div class="profile-list-wrapper" class:editing={$editMode} bind:this={profileListWrapperElement} aria-hidden={$currentPage != null}>
         <h1 class="profile-list-edit-header">Hover over a profile for options:</h1>
         <ProfileList scrollElement={profileListWrapperElement}/>
     </div>

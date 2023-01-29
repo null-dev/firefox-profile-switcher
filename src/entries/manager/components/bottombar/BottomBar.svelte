@@ -151,10 +151,10 @@
 </script>
 
 <div class="bottom-bar" class:expanded={$currentOperation != null}>
-    <div class="bottom-bar-wrapper">
+    <div class="bottom-bar-wrapper" aria-hidden={$currentOperation != null}>
         <div class="bottom-bar-browser">
             <img class="bottom-bar-browser-logo" src={resolveAsset(firefoxLogo)} alt="Firefox logo"/>
-            <div class="bottom-bar-browser-name">
+            <div class="bottom-bar-browser-name" role="heading">
                 <b>Profile&nbsp;Switcher</b> for&nbsp;Firefox
             </div>
         </div>

@@ -158,7 +158,11 @@
                 </div>
                 <div class="profile-card-name">{profile.name}</div>
                 {#if profile.default && $editMode}
-                    <div class="profile-card-default" transition:fade|local={{duration: 500}}>Default</div>
+                    <div class="profile-card-default"
+                         transition:fade|local={{duration: 500}}
+                         aria-label="Default profile">
+                        Default
+                    </div>
                 {/if}
             </div>
         </Card>

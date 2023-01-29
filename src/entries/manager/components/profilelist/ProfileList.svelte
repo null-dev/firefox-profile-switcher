@@ -134,6 +134,7 @@ function scrollTo(node: HTMLElement, scrollTo: boolean) {
         dragDisabled,
         dropFromOthersDisabled: dragDisabled,
         scrollElement,
+        keyboardDisabled: true
      }}
      on:consider={updateWithDragEvent}
      on:finalize={saveDragResult}
