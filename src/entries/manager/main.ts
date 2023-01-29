@@ -1,6 +1,9 @@
 import App from "./App.svelte";
 import browser from "webextension-polyfill";
 import {REQUEST_TYPE_CLOSE_MANAGER} from "~/lib/common";
+import {setScrollWindow} from "svelte-dnd-action";
+
+setScrollWindow(false);
 
 new App({
   target: document.getElementById("app"),

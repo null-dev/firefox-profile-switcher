@@ -29,6 +29,8 @@ import Dimmer from "~/lib/components/loader/Dimmer.svelte";
 import type {Profile, ProfileOrder} from "~/lib/model/profiles";
 import {nativeUpdateProfileOrder} from "~/lib/native";
 
+export let scrollElement;
+
 const editMode = getTypedContext(EDIT_MODE_CONTEXT);
 const newProfileEvent = getTypedContext(NEW_PROFILE_EVENT);
 
@@ -131,6 +133,7 @@ function scrollTo(node: HTMLElement, scrollTo: boolean) {
         dropTargetClasses: [],
         dragDisabled,
         dropFromOthersDisabled: dragDisabled,
+        scrollElement,
      }}
      on:consider={updateWithDragEvent}
      on:finalize={saveDragResult}

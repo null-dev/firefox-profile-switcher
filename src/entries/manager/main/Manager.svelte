@@ -44,13 +44,15 @@
 
     const newProfileEvent = writable(null);
     setTypedContext(NEW_PROFILE_EVENT, newProfileEvent);
+
+    let profileListWrapperElement = null;
 </script>
 
 
 <div class="main-wrapper">
-    <div class="profile-list-wrapper" class:editing={$editMode}>
+    <div class="profile-list-wrapper" class:editing={$editMode} bind:this={profileListWrapperElement}>
         <h1 class="profile-list-edit-header">Hover over a profile for options:</h1>
-        <ProfileList/>
+        <ProfileList scrollElement={profileListWrapperElement}/>
     </div>
     <BottomBar />
 </div>
