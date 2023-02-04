@@ -3,7 +3,7 @@
         text-decoration: underline;
     }
     .section-header {
-        border-top: 1px solid #d1d1d1;
+        border-top: 1px solid var(--in-content-button-background);
         padding: 8px 16px;
         /*color: #4f4f4f;*/
         color: var(--in-content-deemphasized-text);
@@ -34,7 +34,7 @@
     }
     .profile-entry.settings {
         margin-top: 4px;
-        border-top: 1px solid #d1d1d1;
+        border-top: 1px solid var(--in-content-button-background);
         padding-top: 8px;
         padding-bottom: 8px;
     }
