@@ -92,16 +92,22 @@
     import settingsIcon from "~/assets/settings-gray.svg";
     import Button from "~/lib/components/button/Button.svelte";
     import {ButtonType} from "~/lib/components/button/button";
-    import {resolveAsset} from "~/lib/utils";
+    import {resolveAsset} from "~/lib/util/assets";
     import {CURRENT_OPERATION, EDIT_MODE_CONTEXT, OperationKind} from "../manager";
-    import {getTypedContext} from "~/lib/typed-context";
+    import {getTypedContext} from "~/lib/util/typed-context";
     import ProfileEditor from "../editor/ProfileEditor.svelte";
     import {defaultProfileOptions} from "~/lib/model/profiles";
     import {globalOptionsStore, profileListStore} from "~/lib/common";
     import OptionsEditor from "../options/OptionsEditor.svelte";
+    import listIcon from "~/assets/list.svg";
+    import {fade, slide} from 'svelte/transition';
 
     const editMode = getTypedContext(EDIT_MODE_CONTEXT);
     const currentOperation = getTypedContext(CURRENT_OPERATION);
+
+    export let openPopupEditor: () => void | null = null;
+    export let closePopupEditor: (save: boolean) => void | null = null;
+    export let popupEditorActive: boolean = false;
 
     let lastOperation;
     $: if($currentOperation != null) {
@@ -148,6 +154,8 @@
         pokeOperationIdleTimer();
         $currentOperation // Trigger when $currentOperation changes
     }
+
+    const buttonTransition = {duration: 250, axis: 'x'};
 </script>
 
 <div class="bottom-bar" class:expanded={$currentOperation != null}>
@@ -158,15 +166,36 @@
                 <b>Profile&nbsp;Switcher</b> for&nbsp;Firefox
             </div>
         </div>
+        <!-- TODO What to do about this transition? -->
         <div class="bottom-bar-controls">
-            <Button on:click={startAddProfileOperation}>+ Add profile</Button>
-            <Button on:click={() => $editMode = !$editMode}
-                    type={$editMode ? ButtonType.Primary : ButtonType.Normal}>
-                {$editMode ? "Exit edit mode" : "Edit profiles"}
-            </Button>
-            <Button on:click={startEditOptionsOperation}>
-                <img class="control-icon invert-when-dark" src={resolveAsset(settingsIcon)} alt="Settings icon"/>
-            </Button>
+            {#if popupEditorActive}
+                <div transition:slide|local={buttonTransition}>
+                    <Button on:click={() => closePopupEditor?.(false)}>Cancel</Button>
+                </div>
+                <div transition:slide|local={buttonTransition}>
+                    <Button on:click={() => closePopupEditor?.(true)}
+                            type={ButtonType.Primary}>
+                        Save
+                    </Button>
+                </div>
+            {/if}
+            {#if !popupEditorActive}
+                {#if $editMode}
+                    <div>
+                        <Button on:click={openPopupEditor}>
+                            Popup editor
+                        </Button>
+                    </div>
+                {/if}
+                <Button on:click={startAddProfileOperation}>+ Add profile</Button>
+                <Button on:click={() => $editMode = !$editMode}
+                        type={$editMode ? ButtonType.Primary : ButtonType.Normal}>
+                    {$editMode ? "Exit edit mode" : "Edit profiles"}
+                </Button>
+                <Button on:click={startEditOptionsOperation}>
+                    <img class="control-icon invert-when-dark" src={resolveAsset(settingsIcon)} alt="Settings icon"/>
+                </Button>
+            {/if}
         </div>
     </div>
     {#if lastOperation != null && ($currentOperation != null || !operationIdle)}

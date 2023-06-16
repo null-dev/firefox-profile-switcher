@@ -2,11 +2,11 @@
     import DownloadButton from "../button/DownloadButton.svelte";
     import CompileInstructions from "../compileinstructions/CompileInstructions.svelte";
     import Arch from "../display/Arch.svelte";
-    import {getUniqueElementId} from "~/lib/utils";
-    import {getTypedContext} from "~/lib/typed-context";
+    import {getTypedContext} from "~/lib/util/typed-context";
     import {SETUP_STATE_CONTEXT} from "../../main/state";
     import HomeInstallScript from "../homeinstallscript/HomeInstallScript.svelte";
     import {HomeInstallScriptType} from "../homeinstallscript/homeinstall";
+    import {getUniqueElementId} from "~/lib/util/dom";
 
     let flatpak: string | null = null;
     let snap: string | null = null;

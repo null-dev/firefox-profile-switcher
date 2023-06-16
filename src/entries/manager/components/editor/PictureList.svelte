@@ -35,7 +35,7 @@
 
 <script lang="ts">
     import addIcon from "~/assets/add-white.svg";
-    import {resolveAsset} from "~/lib/utils";
+    import {resolveAsset} from "~/lib/util/assets";
     import resAvatarList from "~/assets/avatarlist/avatarlist.json";
     import {customAvatarsStore} from "~/lib/common";
     import AvatarPictureOption from "./AvatarPictureOption.svelte";

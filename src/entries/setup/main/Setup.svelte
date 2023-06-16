@@ -5,7 +5,7 @@
     import InstructionsAndroid from "../components/instructions/InstructionsAndroid.svelte";
     import InstructionsChromeOS from "../components/instructions/InstructionsChromeOS.svelte";
     import InstructionsBSD from "../components/instructions/InstructionsBSD.svelte";
-    import {setTypedContext} from "~/lib/typed-context";
+    import {setTypedContext} from "~/lib/util/typed-context";
     import {SETUP_STATE_CONTEXT} from "./state";
     import type {SetupState} from "./state";
     import {writable} from "svelte/store";

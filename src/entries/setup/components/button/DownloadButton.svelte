@@ -2,7 +2,7 @@
 import Button from "~/lib/components/button/Button.svelte";
 import {ButtonType} from "~/lib/components/button/button";
 import {SETUP_STATE_CONTEXT} from "../../main/state";
-import {getTypedContext} from "~/lib/typed-context";
+import {getTypedContext} from "~/lib/util/typed-context";
 import Arch from "../display/Arch.svelte";
 
 export let arch: string | null = null;

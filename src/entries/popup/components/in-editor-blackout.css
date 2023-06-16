@@ -1,0 +1,21 @@
+.in-editor-blackout.in-editor {
+    position: relative;
+}
+.in-editor-blackout.in-editor > * {
+    opacity: 0.3;
+}
+.in-editor-blackout.in-editor::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: linear-gradient(45deg, #4d4d4d 25%, #8a8a8a 25%, #8a8a8a 50%, #4d4d4d 50%, #4d4d4d 75%, #8a8a8a 75%, #8a8a8a 100%);
+    background-size: 28.28px 28.28px;
+    opacity: 0.4;
+}
+
+.magic {
+    display: initial;
+}

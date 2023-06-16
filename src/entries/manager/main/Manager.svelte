@@ -34,7 +34,10 @@
     import ProfileList from "../components/profilelist/ProfileList.svelte";
     import {CURRENT_OPERATION, EDIT_MODE_CONTEXT, NEW_PROFILE_EVENT} from "../components/manager";
     import {writable} from "svelte/store";
-    import {getTypedContext, setTypedContext} from "~/lib/typed-context";
+    import {setTypedContext} from "~/lib/util/typed-context";
+    import PopupEditorWrapper from "../components/popup/PopupEditorWrapper.svelte";
+    import ProfileListInPopupEditor from "../components/profilelist/ProfileListInPopupEditor.svelte";
+    import {slide} from 'svelte/transition';
 
     const editMode = writable(false);
     setTypedContext(EDIT_MODE_CONTEXT, editMode);
@@ -50,9 +53,20 @@
 
 
 <div class="main-wrapper">
-    <div class="profile-list-wrapper" class:editing={$editMode} bind:this={profileListWrapperElement} aria-hidden={$currentPage != null}>
-        <h1 class="profile-list-edit-header">Hover over a profile for options:</h1>
-        <ProfileList scrollElement={profileListWrapperElement}/>
-    </div>
-    <BottomBar />
+    <PopupEditorWrapper let:open={openPopupEditor} let:close={closePopupEditor} let:editorState={popupEditorState}>
+        <div class="profile-list-wrapper" class:editing={$editMode} bind:this={profileListWrapperElement} aria-hidden={$currentPage != null}>
+            <!-- TODO Fix this transition -->
+            {#if popupEditorState != null}
+                <h1 class="profile-list-edit-header" transition:slide|local>Drag profiles to/from the popup:</h1>
+            {:else}
+                <h1 class="profile-list-edit-header" transition:slide|local>Hover over a profile for options:</h1>
+            {/if}
+            {#if popupEditorState != null}
+                <ProfileListInPopupEditor scrollElement={profileListWrapperElement} state={popupEditorState}/>
+            {:else}
+                <ProfileList scrollElement={profileListWrapperElement}/>
+            {/if}
+        </div>
+        <BottomBar {openPopupEditor} {closePopupEditor} popupEditorActive={popupEditorState != null} />
+    </PopupEditorWrapper>
 </div>

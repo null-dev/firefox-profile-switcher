@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {resolveAsset} from "~/lib/utils";
+    import {resolveAsset} from "~/lib/util/assets";
     import Loader from "~/lib/components/loader/Loader.svelte";
 
     export let src;

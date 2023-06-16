@@ -13,9 +13,13 @@
     import {nativeConnectionStateStore, profileListStore} from "~/lib/common";
     import PopupContent from "../components/popupcontent/PopupContent.svelte";
     import Warning from "../components/warning/Warning.svelte";
+    import {setTypedContext} from "~/lib/util/typed-context";
+    import {POPUP_IN_EDITOR} from "../components/popup";
 
     $: currentProfile = $profileListStore?.profiles
         .find(p => p.id === $profileListStore.current_profile_id);
+
+    setTypedContext(POPUP_IN_EDITOR, false);
 </script>
 
 {#if $nativeConnectionStateStore && currentProfile != null}

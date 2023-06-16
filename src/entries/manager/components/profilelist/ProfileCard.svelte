@@ -66,7 +66,7 @@
     import Card from "~/lib/components/card/Card.svelte";
     import type {Profile} from "~/lib/model/profiles";
     import {fade} from 'svelte/transition';
-    import {getTypedContext} from "~/lib/typed-context";
+    import {getTypedContext} from "~/lib/util/typed-context";
     import {confirmAndDeleteProfile, CURRENT_OPERATION, EDIT_MODE_CONTEXT, OperationKind} from "../manager";
     import {globalOptionsStore, loadAvatarIntoImageAction} from "~/lib/common";
     import {nativeLaunchProfile} from "~/lib/native";
@@ -83,12 +83,13 @@
     // This is required to maintain the hover state while the user drags the card
     // Without this, there will be a flicker when the user drops the card
     export let fakeHovering = false;
-
-    const editMode = getTypedContext(EDIT_MODE_CONTEXT);
-    const currentOperation = getTypedContext(CURRENT_OPERATION);
+    export let neverHover = false;
+    export let placeholder: boolean = false;
+    export let editMode: boolean = false;
+    export let openEditor: () => void | null = null;
 
     async function onProfileClick() {
-        if(!$editMode) {
+        if(!editMode) {
             try {
                 await nativeLaunchProfile(profile.id)
                 window.close();
@@ -123,20 +124,13 @@
         }
     }
 
-    function openEditor() {
-        $currentOperation = {
-            kind: OperationKind.EditProfile,
-            existingProfile: profile,
-        };
-    }
-
     $: active = deleting || deleted;
 </script>
 
 <Hoverable let:hovering={hovering}>
-    {@const editHover = $editMode && (hovering || fakeHovering || active || $globalOptionsStore.editModeAlwaysShowOptions)}
+    {@const editHover = !neverHover && editMode && (hovering || fakeHovering || active || $globalOptionsStore.editModeAlwaysShowOptions)}
     <div class="profile-card-wrapper" class:editHover>
-        <Card>
+        <Card --this-card-shadow={placeholder ? 'initial' : 'var(--card-shadow)'} --this-card-border={placeholder ? '2px dashed grey' : 'initial'}>
             <div class="profile-card" tabindex="0" on:click={onProfileClick} on:keydown={onProfileKeyDown}>
                 <div class="profile-card-image-wrapper">
                     <img class="profile-card-image"
@@ -157,7 +151,7 @@
                     {/if}
                 </div>
                 <div class="profile-card-name">{profile.name}</div>
-                {#if profile.default && $editMode}
+                {#if profile.default && editMode}
                     <div class="profile-card-default"
                          transition:fade|local={{duration: 500}}
                          aria-label="Default profile">

@@ -5,7 +5,8 @@ import {nativeGetAvatar} from "~/lib/native";
 import {derived, readable} from "svelte/store";
 import type {Readable} from "svelte/store";
 import {defaultGlobalOptions} from "~/lib/model/profiles";
-import type {ProfileList, ProfileOrder} from "~/lib/model/profiles";
+import type {ProfileList, ProfileOrder, GlobalOptions} from "~/lib/model/profiles";
+import {reducedMotionStore} from "~/lib/util/anim";
 
 export const RECOMMENDED_CONNECTOR_VERSION = "0.0.9";
 
@@ -21,17 +22,17 @@ export const STORAGE_CACHE_PROFILE_ORDER = "cache.profile-order";
 
 export const EXTENSION_ID = browser.i18n.getMessage("@@extension_id");
 
-function storageKeyStore(storageType, key, deriver?): Readable<any | null> {
+function storageKeyStore(storageType, key, deriver?: (value: any, initial: boolean) => any): Readable<any | null> {
     let deriverOrDefault = deriver;
     if(deriverOrDefault == null)
         deriverOrDefault = z => z;
-    return readable(null, set => {
+    return readable(deriverOrDefault(null, true), set => {
         browser.storage[storageType].get(key)
-            .then(result => set(deriverOrDefault(result[key])));
+            .then(result => set(deriverOrDefault(result[key], false)));
 
         const listener = (changes, areaName) => {
             if(areaName === storageType && key in changes) {
-                set(deriverOrDefault(changes[key].newValue));
+                set(deriverOrDefault(changes[key].newValue, false));
             }
         };
         browser.storage.onChanged.addListener(listener);
@@ -39,7 +40,8 @@ function storageKeyStore(storageType, key, deriver?): Readable<any | null> {
     });
 }
 
-const profileOrderStore: Readable<ProfileOrder> = storageKeyStore('local', STORAGE_CACHE_PROFILE_ORDER, o => o ?? []);
+const profileOrderStore: Readable<ProfileOrder> = storageKeyStore('local', STORAGE_CACHE_PROFILE_ORDER,
+    (o, initial) => initial ? o : (o ?? []));
 const unsortedProfileListStore: Readable<ProfileList | null> = storageKeyStore('local', STORAGE_CACHE_PROFILE_LIST);
 export const profileListStore: Readable<ProfileList | null> = derived(
     [unsortedProfileListStore, profileOrderStore],
@@ -71,13 +73,13 @@ export const nativeConnectionStateStore: Readable<boolean> = storageKeyStore(
         state => state ?? false
 );
 export const nativeConnectorVersionStore = storageKeyStore('local', STORAGE_NATIVE_CONNECTOR_VERSION);
-export const globalOptionsStore = storageKeyStore('local', STORAGE_CACHE_GLOBAL_OPTIONS, options => ({
+export const globalOptionsStore: Readable<GlobalOptions> = storageKeyStore('local', STORAGE_CACHE_GLOBAL_OPTIONS, options => ({
     ...defaultGlobalOptions(),
     ...(options ?? {})
 }));
-export const customAvatarsStore = storageKeyStore('local', STORAGE_CACHE_CUSTOM_AVATARS,
+export const customAvatarsStore: Readable<string[]> = storageKeyStore('local', STORAGE_CACHE_CUSTOM_AVATARS,
         avatars => avatars ?? []);
-export const darkModeStore = derived(
+export const darkModeStore: Readable<boolean> = derived(
     [profileListStore, globalOptionsStore],
     ([profileList, globalOptions]) => {
         const profileDarkMode = profileList
@@ -87,6 +89,12 @@ export const darkModeStore = derived(
             ?.darkMode;
         const globalDarkMode = globalOptions?.darkMode;
         return globalDarkMode ?? profileDarkMode ?? false;
+    }
+);
+export const disableAnimationsStore: Readable<boolean> = derived(
+    [globalOptionsStore, reducedMotionStore],
+    ([globalOptions, reducedMotion]) => {
+        return reducedMotion || globalOptions.disableAnimations
     }
 );
 

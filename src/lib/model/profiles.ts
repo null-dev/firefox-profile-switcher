@@ -21,6 +21,8 @@ export interface GlobalOptions {
     darkMode: boolean | null;
     windowFocusWorkaround: boolean;
     editModeAlwaysShowOptions: boolean;
+    disableAnimations: boolean;
+    popupProfileOrder: string[] | null;
 }
 
 export function defaultGlobalOptions(): GlobalOptions {
@@ -28,6 +30,8 @@ export function defaultGlobalOptions(): GlobalOptions {
         darkMode: null,
         windowFocusWorkaround: false,
         editModeAlwaysShowOptions: false,
+        disableAnimations: false,
+        popupProfileOrder: null,
     }
 }
 

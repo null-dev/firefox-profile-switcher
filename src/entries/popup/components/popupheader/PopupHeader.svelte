@@ -1,8 +1,10 @@
 <style>
+    @import "../in-editor-blackout.css" scoped;
+
     .profile-picture-wrapper {
         width: 100%;
         text-align: center;
-        margin: 16px 0;
+        padding: 16px 0;
     }
     .profile-picture {
         width: 64px;
@@ -38,6 +40,7 @@
     import compareVersions from "compare-versions";
 
     export let currentProfile: Profile | null = null;
+    export let inEditor: boolean = false;
 
     function shouldShowUpdateButton(version: string | null): boolean {
         return version != null && compareVersions(RECOMMENDED_CONNECTOR_VERSION, version) >= 1;
@@ -51,8 +54,8 @@
     }
 </script>
 
-<div class="profile-picture-wrapper">
-    {#if shouldShowUpdateButton($nativeConnectorVersionStore)}
+<div class="profile-picture-wrapper in-editor-blackout" class:in-editor={inEditor}>
+    {#if !inEditor && shouldShowUpdateButton($nativeConnectorVersionStore)}
         <div class="update-available-button-wrapper">
             <Button type={ButtonType.Primary} on:click={openUpdatePage}>
                 Update<br/>available!

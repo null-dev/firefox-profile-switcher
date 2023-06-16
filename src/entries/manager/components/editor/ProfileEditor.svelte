@@ -3,14 +3,14 @@
     import ManagerPage from "../../main/ManagerPage.svelte";
     import Button from "~/lib/components/button/Button.svelte";
     import {ButtonType} from "~/lib/components/button/button";
-    import {getTypedContext} from "~/lib/typed-context";
+    import {getTypedContext} from "~/lib/util/typed-context";
     import {confirmAndDeleteProfile, CURRENT_OPERATION, NEW_PROFILE_EVENT} from "../manager";
-    import {getUniqueElementId} from "~/lib/utils";
     import Input from "~/lib/components/input/Input.svelte";
     import PictureList from "./PictureList.svelte";
     import {nativeCreateProfile, nativeDeleteProfile, nativeUpdateProfile} from "~/lib/native";
-    import {success} from "~/lib/toast";
+    import {success} from "~/lib/util/toast";
     import InputLabel from "~/lib/components/input/InputLabel.svelte";
+    import {getUniqueElementId} from "~/lib/util/dom";
 
     export let operation: EditProfileOperation;
 

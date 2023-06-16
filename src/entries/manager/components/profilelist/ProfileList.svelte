@@ -1,20 +1,5 @@
 <style>
-    .profile-list {
-        display: flex;
-        flex-direction: row;
-        padding: 12px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    /*.dimmer-wrapper {
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0.25s, opacity 0.25s;
-    }
-    .dimmer-wrapper-active {
-        visibility: visible;
-        opacity: 1;
-    }*/
+    @import "./profilelist.css" scoped;
 </style>
 
 <script lang="ts">
@@ -23,16 +8,19 @@ import {profileListStore} from "~/lib/common";
 import {scale, slide, fade} from "svelte/transition";
 import {dndzone, SHADOW_ITEM_MARKER_PROPERTY_NAME, TRIGGERS} from 'svelte-dnd-action';
 import {flip} from 'svelte/animate';
-import {getTypedContext} from "~/lib/typed-context";
-import {EDIT_MODE_CONTEXT, NEW_PROFILE_EVENT} from "../manager";
+import {getTypedContext} from "~/lib/util/typed-context";
+import {CURRENT_OPERATION, EDIT_MODE_CONTEXT, NEW_PROFILE_EVENT, OperationKind} from "../manager";
 import Dimmer from "~/lib/components/loader/Dimmer.svelte";
 import type {Profile, ProfileOrder} from "~/lib/model/profiles";
 import {nativeUpdateProfileOrder} from "~/lib/native";
+import {flipDurationMs} from "./profilelist";
+import {DragManager} from "~/lib/util/drag";
 
 export let scrollElement;
 
 const editMode = getTypedContext(EDIT_MODE_CONTEXT);
 const newProfileEvent = getTypedContext(NEW_PROFILE_EVENT);
+const currentOperation = getTypedContext(CURRENT_OPERATION);
 
 $: profiles = $profileListStore?.profiles ?? [];
 $: profilesDisplay = [...profiles];
@@ -45,22 +33,11 @@ function areProfileOrdersEqual(a: ProfileOrder, b: ProfileOrder): boolean {
     return a.length === b.length && a.every((id, idx) => id === b[idx])
 }
 
-const flipDurationMs = 200;
-
-let lastDraggedId = null;
-const DRAG_STOPPED_TRIGGERS = [
-    TRIGGERS.DRAG_STOPPED,
-    TRIGGERS.DROPPED_INTO_ANOTHER,
-    TRIGGERS.DROPPED_INTO_ZONE,
-    TRIGGERS.DROPPED_OUTSIDE_OF_ANY,
-];
+let dragManager = new DragManager();
+const draggingIdStore = dragManager.draggingIdStore();
 function updateWithDragEvent(e) {
     const {items, info} = e.detail;
-    if(info.trigger === TRIGGERS.DRAG_STARTED) {
-        lastDraggedId = info.id;
-    } else if(DRAG_STOPPED_TRIGGERS.includes(info.trigger)) {
-        lastDraggedId = null;
-    }
+    dragManager.onConsider(info);
 
     if($editMode) {
         profilesDisplay = items;
@@ -83,7 +60,7 @@ async function saveDragResult(e) {
 }
 
 // Display "saving" dimmer if user is not dragging and profile order does not match backend profile order state
-$: saving = lastDraggedId == null && !areProfileOrdersEqual(calcProfileOrder(profilesDisplay), existingProfileOrder);
+$: saving = $draggingIdStore == null && !areProfileOrdersEqual(calcProfileOrder(profilesDisplay), existingProfileOrder);
 $: dragDisabled = !$editMode || saving;
 
 // Only display dimmer if saving for more than 200ms. Otherwise, it looks like flickering.
@@ -124,6 +101,13 @@ function scrollTo(node: HTMLElement, scrollTo: boolean) {
         }
     }
 }
+
+function openEditor(profile) {
+    $currentOperation = {
+        kind: OperationKind.EditProfile,
+        existingProfile: profile,
+    };
+}
 </script>
 
 <div use:dndzone={{
@@ -134,7 +118,7 @@ function scrollTo(node: HTMLElement, scrollTo: boolean) {
         dragDisabled,
         dropFromOthersDisabled: dragDisabled,
         scrollElement,
-        keyboardDisabled: true
+        keyboardDisabled: true,
      }}
      on:consider={updateWithDragEvent}
      on:finalize={saveDragResult}
@@ -145,7 +129,9 @@ function scrollTo(node: HTMLElement, scrollTo: boolean) {
         <!-- TODO: Bring back transition using custom code: https://svelte.dev/repl/3f1e68203ef140969a8240eba3475a8d?version=3.55.1 -->
         <div animate:flip={{duration:flipDurationMs}} use:scrollTo={profile.id === $newProfileEvent}>
             <ProfileCard {profile}
-                         fakeHovering={profile.id === lastDraggedId} />
+                         fakeHovering={profile.id === $draggingIdStore}
+                         editMode={$editMode}
+                         openEditor={() => openEditor(profile)}/>
         </div>
     {/each}
 </div>

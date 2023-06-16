@@ -1,5 +1,6 @@
 import type {Profile, ProfileList} from "~/lib/model/profiles";
 import Fuse from "fuse.js";
+import type {ADTEnum} from "~/lib/util/types";
 
 function chunkFuseMatches(matches): SearchResult[] {
     return matches.map(result => {
@@ -62,3 +63,8 @@ export function buildSearchEngine(profileList: ProfileList): SearchEngine {
         }
     }
 }
+
+export type PopupSelection = ADTEnum<"kind", {
+    profile: { id: string },
+    manageButton: {}
+}>;

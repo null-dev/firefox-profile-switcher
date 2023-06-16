@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {getTypedContext} from "~/lib/typed-context";
+    import {getTypedContext} from "~/lib/util/typed-context";
     import {SETUP_STATE_CONTEXT} from "../../main/state";
 
     export let os: string | string[];

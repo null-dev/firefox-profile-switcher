@@ -1,4 +1,4 @@
-import {newContextKey} from "~/lib/typed-context";
+import {newContextKey} from "~/lib/util/typed-context";
 import type {Writable} from "svelte/store";
 import type {GlobalOptions, Profile, ProfileOptions} from "~/lib/model/profiles";
 import {nativeDeleteProfile} from "~/lib/native";

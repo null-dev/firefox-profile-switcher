@@ -6,10 +6,14 @@
     "useDefineForClassFields": true,
     "module": "esnext",
     "resolveJsonModule": true,
+    "importsNotUsedAsValues": "error",
     "baseUrl": ".",
     "paths": {
       "~/lib/*": ["src/lib/*"],
       "~/assets/*": ["src/assets/*"],
+      // Importing from other pages is bad practice so only allow imports from popup and manager for popup editor
+      "~/entries/popup/*": ["src/entries/popup/*"],
+      "~/entries/manager/*": ["src/entries/manager/*"]
     },
     /**
      * Typecheck JS in `.svelte` and `.js` files by default.

@@ -15,14 +15,14 @@
     import Button from "~/lib/components/button/Button.svelte";
     import {ButtonType} from "~/lib/components/button/button";
     import Input from "~/lib/components/input/Input.svelte";
-    import {getUniqueElementId} from "~/lib/utils";
     import {CURRENT_OPERATION} from "../manager";
     import type {EditOptionsOperation} from "../manager";
     import type {GlobalOptions, ProfileOptions} from "~/lib/model/profiles";
-    import {getTypedContext} from "~/lib/typed-context";
+    import {getTypedContext} from "~/lib/util/typed-context";
     import InputLabel from "~/lib/components/input/InputLabel.svelte";
     import {profileListStore} from "~/lib/common";
     import {nativeUpdateOptions, nativeUpdateProfile} from "~/lib/native";
+    import {getUniqueElementId} from "~/lib/util/dom";
 
     export let operation: EditOptionsOperation;
 
@@ -40,6 +40,7 @@
     let darkModeAllChecked = false;
     let windowFocusWorkAroundChecked = false;
     let editModeAlwaysShowOptionsChecked = false;
+    let popupProfileOrder = null;
     deserializeSettings(operation.initialProfileOptions, operation.initialGlobalOptions)
 
     function deserializeSettings(profile: ProfileOptions, global: GlobalOptions) {
@@ -47,6 +48,7 @@
         darkModeAllChecked = global.darkMode != null;
         windowFocusWorkAroundChecked = global.windowFocusWorkaround;
         editModeAlwaysShowOptionsChecked = global.editModeAlwaysShowOptions;
+        popupProfileOrder = global.popupProfileOrder;
     }
 
     let saving = false;
@@ -61,6 +63,8 @@
                 darkMode: darkModeAllChecked ? darkModeChecked : null,
                 windowFocusWorkaround: windowFocusWorkAroundChecked,
                 editModeAlwaysShowOptions: editModeAlwaysShowOptionsChecked,
+                disableAnimations: false, // TODO
+                popupProfileOrder
             };
 
             const profileList = $profileListStore?.profiles;

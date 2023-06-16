@@ -51,7 +51,7 @@
     import {loadAvatarIntoImageAction, profileListStore} from "~/lib/common";
     import {scale} from "svelte/transition";
     import deleteIcon from "~/assets/delete-white.svg";
-    import {resolveAsset} from "~/lib/utils";
+    import {resolveAsset} from "~/lib/util/assets";
     import Loader from "~/lib/components/loader/Loader.svelte";
     import {nativeDeleteAvatar} from "~/lib/native";
     import type {AvatarItem} from "./avatar";
