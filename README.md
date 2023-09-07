@@ -38,6 +38,6 @@ Thanks to Mozilla for making this great browser and for creating the design lang
 
 The extension and native program are licensed under GPL v3.
 
-The profile pictures were created by the Chromium authors and are licensed under the Chromium license, see: https://github.com/null-dev/firefox-profile-switcher/blob/master/img/avatars/LICENSE.txt.
+The profile pictures were created by the Chromium authors and are licensed under the Chromium license, see: https://github.com/null-dev/firefox-profile-switcher/blob/master/public/img/avatars/LICENSE.txt.
 
 Some of the CSS used in this extension were developed by Mozilla and are licensed under MPL v2.
