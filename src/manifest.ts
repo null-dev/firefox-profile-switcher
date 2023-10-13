@@ -5,7 +5,8 @@ const manifest = {
   permissions: [
     "storage",
     "nativeMessaging",
-    "tabs"
+    "tabs",
+    "contextMenus"
   ],
   background: {
     scripts: ["src/entries/background/main.ts"],
