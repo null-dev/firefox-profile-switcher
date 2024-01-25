@@ -75,6 +75,9 @@ async function initNativePort(eventCallback) {
             curProfileId = profileListData.current_profile_id;
         }
     }
+    
+    browser.windows.onFocusChanged.addListener(onWindowFocusChange);
+    
     nativeRequestInternal(nativePort, "Initialize", {
         extension_id: EXTENSION_ID,
         extension_version: APP_VERSION,
@@ -235,4 +238,21 @@ export async function nativeDeleteAvatar(id) {
 
 export async function nativeUpdateProfileOrder(order) {
     return await nativeRequest("UpdateProfileOrder", { order });
+}
+
+//Make the last focused window be the current "Default Profile" so that external links open in whatever was the last window you focused.
+export async function onWindowFocusChange(windowID) {
+    //We're not in the currently active Profile or no main window has been focused again yet
+    if(windowID < 0) { return; }
+
+    const profileList = await browser.storage.local.get(STORAGE_CACHE_PROFILE_LIST_KEY);
+    if(profileList != null) {
+        const profileListData = profileList[STORAGE_CACHE_PROFILE_LIST_KEY];
+        if(profileListData != null) {
+            const curProfile = profileListData.profiles.find((profile) => profile.id == profileListData.current_profile_id);
+            if(curProfile.default == true) { return; } //Don't waste time setting default again
+            
+            await nativeUpdateProfile(curProfile.id, curProfile.name, curProfile.avatar, true, curProfile.options);
+        }
+    }
 }
