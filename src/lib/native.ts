@@ -249,7 +249,7 @@ export async function onWindowFocusChange(windowID) {
     if(profileList != null) {
         const profileListData = profileList[STORAGE_CACHE_PROFILE_LIST_KEY];
         if(profileListData != null) {
-            let curProfile = profileListData.profiles.find((profile) => profile.id == profileListData.current_profile_id);
+            const curProfile = profileListData.profiles.find((profile) => profile.id == profileListData.current_profile_id);
 			if(curProfile.default == true) { return; } //Don't waste time setting default again
 			
 			await nativeUpdateProfile(curProfile.id, curProfile.name, curProfile.avatar, true, curProfile.options);
